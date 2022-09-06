@@ -1,0 +1,76 @@
+/* usual rules */
+body {
+    font-family: 'Lato', sans-serif;
+    margin: auto;
+    box-sizing: content-box;
+    max-width: 1440px;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header img {
+    height: 90px;
+    margin-top: 45px;
+    margin-bottom: 20px;
+}
+
+/* Navigation */
+
+.form_search {
+    height: 70px;
+}
+
+.input_search,
+.span_search {
+    background: #E7E7E7;
+    border: transparent;
+
+}
+
+.icon_search {
+    font-size: xx-large;
+}
+
+.filter {
+    display: flex;
+}
+
+.dropdown {
+    margin-top: 20px;
+    margin-right: 20px;
+
+}
+
+.drop_btn {
+    width: 150px;
+    padding: 15px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.angle-up {
+    display: none;
+    position: absolute;
+    left: 120px;
+    top: 20px
+}
+
+.angle-down {
+    position: absolute;
+    left: 120px;
+    top: 20px
+}
+
+.btn-appareils {
+    background: #68d9a4;
+    color: white
+}

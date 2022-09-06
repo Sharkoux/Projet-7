@@ -1,12 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <!--Import Font and style files-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5a8a8c5fcf.js" crossorigin="anonymous"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+    <title>Les petits plats</title>
 </head>
+
 <body>
-    
+    <!--Header-->
+    <header>
+        <img src="./asset/logo.png">
+    </header>
+    <!--Navigation-->
+    <nav>
+        <form class="form_search input-group input-group-lg">
+            <input class="input_search form-control" type="text" placeholder="Rechercher une recette">
+            <div class="input-group-append">
+                <span class="input-group-text span_search "><i class="fas fa-search icon_search"
+                        aria-hidden="true"></i></span>
+            </div>
+        </form>
+        <div class="filter">
+            <div class="dropdown">
+                <button onclick="" class="drop_btn btn btn-primary ">Ingrédients<em
+                        class="fa-solid fa-angle-down angle-down"></em> <em class="fa-solid fa-angle-up angle-up"></em>
+                </button>
+                <div id="Dropdown" class="dropdown-menu">
+
+                </div>
+            </div>
+            <div class="dropdown">
+                <button onclick="" class="drop_btn btn btn-appareils">Appareils<em
+                        class="fa-solid fa-angle-down angle-down"></em> <em class="fa-solid fa-angle-up angle-up"></em>
+                </button>
+                <div id="Dropdown" class="dropdown-menu">
+
+                </div>
+            </div>
+            <div class="dropdown">
+                <button onclick="" class="drop_btn btn btn-danger ">Ustensiles<em
+                        class="fa-solid fa-angle-down angle-down"></em> <em class="fa-solid fa-angle-up angle-up"></em>
+                </button>
+                <div id="Dropdown" class="dropdown-menu">
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--Main-->
+    <main>
+    <!--Zone card recipes-->
+        <div class="body_recipes">
+            <div class="recipes_card">
+
+                
+            </div>
+
+        </div>
+    </main>
+
+    <!--Import script JS-->
+
 </body>
+
 </html>
