@@ -28,7 +28,7 @@ class RecipeCard {
 /* function for send data to display */
 async function DisplayData(DataRecipe) {
   const recipesZone = document.querySelector('.recipes_card');
- 
+
   for (let a = 0; a < DataRecipe.length; a += 1) {
     const test = new RecipeCard(DataRecipe[a]);
     const recipesDOM = createRecipesCardDOM(test);
