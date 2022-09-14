@@ -75,6 +75,26 @@ header img {
     color: white
 }
 
+.dropdown-menu {
+    width: 650px;
+    max-height: 400px ;
+    background-color:#007bff ;
+    flex-direction: column;
+    flex-wrap: wrap;
+    color: white;
+    padding: 10px;
+    overflow: hidden;
+   
+}
+.active {
+    display: flex!important
+}
+
+.btn-active {
+    width: 650px;
+
+}
+
 /* Card Recipes */ 
 
 .recipes_card {
@@ -83,6 +103,7 @@ header img {
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
 
 
 article {

@@ -35,3 +35,13 @@ function createRecipesCardDOM(data) {
 
   return article;
 }
+
+function TagIngredient(data) {
+  for (let e = 0; e < data.length; e += 1) {
+    const TagIngredients = document.createElement('a');
+
+    const TagContent = data[e].ingredient;
+    TagIngredients.innerText = `${TagContent}`;
+    return TagIngredients;
+  }
+}

@@ -1,14 +1,23 @@
 import { recipes } from '../data/recipes.js';
 
-/* import data to JSON */
-async function GetData() {
-  const data = recipes;
-  const jsonStrings = data.map((item) => JSON.stringify(item));
-  const DataRecipe = jsonStrings.map((s) => JSON.parse(s));
-  return {
-    DataRecipe: [...DataRecipe],
-  };
-}
+const searchinput = document.querySelector('.input_search');
+const recipesZone = document.querySelector('.recipes_card');
+const dropdownMenu = document.querySelectorAll('.dropdown-menu');
+const dropbtnPrimary = document.querySelector('.btn-primary');
+const dropdownIngredients = document.querySelector('.btn-ingrédients');
+const dropDown = document.querySelector('.dropdown');
+
+/* Event */
+
+searchinput.addEventListener('keyup', () => {
+  const Input = searchinput.value.trim();
+  Search(Input);
+});
+
+dropbtnPrimary.addEventListener('click', () => {
+  dropdownIngredients.classList.toggle('active');
+});
+
 /* class for format data card */
 class RecipeCard {
   constructor({
@@ -26,19 +35,34 @@ class RecipeCard {
 }
 
 /* function for send data to display */
-async function DisplayData(DataRecipe) {
-  const recipesZone = document.querySelector('.recipes_card');
-
+function DisplayData(DataRecipe) {
   for (let a = 0; a < DataRecipe.length; a += 1) {
     const test = new RecipeCard(DataRecipe[a]);
     const recipesDOM = createRecipesCardDOM(test);
     recipesZone.appendChild(recipesDOM);
+
+    const tagDom = TagIngredient(DataRecipe[a].ingredients);
+    dropdownMenu[0].appendChild(tagDom);
+  }
+}
+
+/* function filter */
+function Search(Input) {
+  if (Input.length > 2) {
+    const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(Input));
+    const ResultFilters = recipes.filter((item) => item.name.toLocaleLowerCase().includes(Input.toLocaleLowerCase())
+    || item.description.includes(Input)
+    || filtIngredients(item.ingredients));
+
+    recipesZone.innerHTML = '';
+    dropdownMenu[0].innerHTML = '';
+
+    DisplayData(ResultFilters);
   }
 }
 
 async function init() {
-  const { DataRecipe } = await GetData();
-  DisplayData(DataRecipe);
+  DisplayData(recipes);
 }
 
 init();
