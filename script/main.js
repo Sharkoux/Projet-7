@@ -7,8 +7,8 @@ const dropbtnPrimary = document.querySelector('.btn-primary');
 const dropdownIngredients = document.querySelector('.btn-ingrédients');
 const dropDownOne = document.querySelectorAll('.dropdown');
 const arrowUp = document.querySelectorAll('.angle-up');
-let array = [];
-let array2 = [];
+const array = [];
+const array2 = [];
 /* Event */
 
 searchinput.addEventListener('keyup', () => {
@@ -65,22 +65,19 @@ function DisplayData(DataRecipe) {
 /* function send data for display TAG ingredients */
 function TagIngredientDisplay(recipes) {
   for (let i = 0; i < recipes.length; i += 1) {
-  
-    array.push(recipes[i].ingredients)
-   
+    array.push(recipes[i].ingredients);
+
     const tagDom = TagIngredient(recipes[i].ingredients);
-    console.log(recipes[i].ingredients)
+    
     dropdownMenu[0].appendChild(tagDom);
   }
-  array.forEach(element => {
-    element.forEach(eleme => {
-      
+  array.forEach((element) => {
+    element.forEach((eleme) => {
       array2.push(eleme.ingredient.toLocaleLowerCase());
-      
     });
-      console.log(array2)
-      const finalss = [...new Set(array2)];
-      console.log(finalss)
+   
+    const finalss = [...new Set(array2)];
+    console.log(finalss);
   });
 }
 
