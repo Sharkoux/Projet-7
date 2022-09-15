@@ -5,7 +5,8 @@ const recipesZone = document.querySelector('.recipes_card');
 const dropdownMenu = document.querySelectorAll('.dropdown-menu');
 const dropbtnPrimary = document.querySelector('.btn-primary');
 const dropdownIngredients = document.querySelector('.btn-ingrédients');
-const dropDown = document.querySelector('.dropdown');
+const dropDownOne = document.querySelectorAll(".dropdown");
+const arrowUp = document.querySelectorAll(".angle-up");
 
 /* Event */
 
@@ -14,9 +15,26 @@ searchinput.addEventListener('keyup', () => {
   Search(Input);
 });
 
-dropbtnPrimary.addEventListener('click', () => {
-  dropdownIngredients.classList.toggle('active');
+dropbtnPrimary.addEventListener('click', OpenTagIngredient);
+
+document.addEventListener('keydown', (e) => {
+  const keyCode = e.keyCode ? e.keyCode : e.which;
+  if (keyCode === 27) {
+  CloseTagIngredient()
+  }
 });
+
+function OpenTagIngredient() {
+  dropdownIngredients.classList.toggle('active');
+  dropbtnPrimary.innerHTML = `<input class="input form-control search-ingredients" type="text" placeholder="Rechercher un ingrédient"></input><em class="fa-solid fa-angle-up angle-up"></em>`;
+  dropbtnPrimary.removeEventListener('click', OpenTagIngredient);  
+}
+
+function CloseTagIngredient() {
+  dropdownIngredients.classList.remove('active');
+  dropbtnPrimary.innerHTML = `Ingrédients <em class="fa-solid fa-angle-down angle-down"></em>`;
+  dropbtnPrimary.addEventListener('click', OpenTagIngredient);
+}
 
 /* class for format data card */
 class RecipeCard {
@@ -40,8 +58,14 @@ function DisplayData(DataRecipe) {
     const test = new RecipeCard(DataRecipe[a]);
     const recipesDOM = createRecipesCardDOM(test);
     recipesZone.appendChild(recipesDOM);
+  }
+}
 
-    const tagDom = TagIngredient(DataRecipe[a].ingredients);
+/* function send data for display TAG ingredients */
+function TagIngredientDisplay(recipes) {
+  for (let i = 0; i < recipes.length; i += 1) {
+    const tagDom = TagIngredient(recipes[i].ingredients);
+
     dropdownMenu[0].appendChild(tagDom);
   }
 }
@@ -55,14 +79,26 @@ function Search(Input) {
     || filtIngredients(item.ingredients));
 
     recipesZone.innerHTML = '';
-    dropdownMenu[0].innerHTML = '';
+    /*
+    const result = recipes.filter((item) => filtIngredients(item.ingredients));
 
+    for (let e = 0; e < result.length; e += 1) {
+      console.log(result[e].ingredients);
+      const finals = result[e].ingredients;
+      const tagDom = TagIngredient(finals);
+      dropdownMenu[0].innerHTML = '';
+
+      console.log(tagDom);
+      dropdownMenu[0].appendChild(tagDom);
+    }
+    */
     DisplayData(ResultFilters);
   }
 }
 
 async function init() {
   DisplayData(recipes);
+  TagIngredientDisplay(recipes);
 }
 
 init();

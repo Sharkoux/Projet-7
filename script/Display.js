@@ -37,9 +37,14 @@ function createRecipesCardDOM(data) {
 }
 
 function TagIngredient(data) {
-  for (let e = 0; e < data.length; e += 1) {
-    const TagIngredients = document.createElement('a');
+  const TagIngredients = document.createElement('a');
 
+  if (Array.isArray(data) === false) {
+    TagIngredients.innerText = `${data}`;
+    return TagIngredients;
+  }
+
+  for (let e = 0; e < data.length; e += 1) {
     const TagContent = data[e].ingredient;
     TagIngredients.innerText = `${TagContent}`;
     return TagIngredients;

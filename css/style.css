@@ -9,6 +9,7 @@ body {
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 header {
@@ -47,20 +48,22 @@ header img {
 .dropdown {
     margin-top: 20px;
     margin-right: 20px;
-
+    max-width: 650px;
 }
 
 .drop_btn {
-    width: 150px;
+    min-width: 150px;
     padding: 15px;
     font-weight: 400;
     text-align: left;
+    border-radius: 5px 5px 0px 0px;
+    border: 0px transparent;
 }
 
 .angle-up {
-    display: none;
+   z-index: 1000;
     position: absolute;
-    left: 120px;
+    left: 610px;
     top: 20px
 }
 
@@ -84,15 +87,31 @@ header img {
     color: white;
     padding: 10px;
     overflow: hidden;
-   
+    border-radius: 0 0 5px 5px;
+    border: transparent;
 }
 .active {
-    display: flex!important
+    display: flex!important;
+    margin-top: -1px;
 }
 
 .btn-active {
     width: 650px;
 
+}
+
+.search-ingredients {
+    width: 580px;
+    color: white!important;
+    background: #007bff!important ;
+    border: transparent;
+    padding: 0px!important;
+    margin-right: 40px;
+}
+
+.search-ingredients::placeholder {
+    color: white!important;
+    opacity: 0.5;
 }
 
 /* Card Recipes */ 
