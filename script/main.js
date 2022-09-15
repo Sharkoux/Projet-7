@@ -5,9 +5,10 @@ const recipesZone = document.querySelector('.recipes_card');
 const dropdownMenu = document.querySelectorAll('.dropdown-menu');
 const dropbtnPrimary = document.querySelector('.btn-primary');
 const dropdownIngredients = document.querySelector('.btn-ingrédients');
-const dropDownOne = document.querySelectorAll(".dropdown");
-const arrowUp = document.querySelectorAll(".angle-up");
-
+const dropDownOne = document.querySelectorAll('.dropdown');
+const arrowUp = document.querySelectorAll('.angle-up');
+let array = [];
+let array2 = [];
 /* Event */
 
 searchinput.addEventListener('keyup', () => {
@@ -20,19 +21,19 @@ dropbtnPrimary.addEventListener('click', OpenTagIngredient);
 document.addEventListener('keydown', (e) => {
   const keyCode = e.keyCode ? e.keyCode : e.which;
   if (keyCode === 27) {
-  CloseTagIngredient()
+    CloseTagIngredient();
   }
 });
 
 function OpenTagIngredient() {
   dropdownIngredients.classList.toggle('active');
-  dropbtnPrimary.innerHTML = `<input class="input form-control search-ingredients" type="text" placeholder="Rechercher un ingrédient"></input><em class="fa-solid fa-angle-up angle-up"></em>`;
-  dropbtnPrimary.removeEventListener('click', OpenTagIngredient);  
+  dropbtnPrimary.innerHTML = '<input class="input form-control search-ingredients" type="text" placeholder="Rechercher un ingrédient"></input><em class="fa-solid fa-angle-up angle-up"></em>';
+  dropbtnPrimary.removeEventListener('click', OpenTagIngredient);
 }
 
 function CloseTagIngredient() {
   dropdownIngredients.classList.remove('active');
-  dropbtnPrimary.innerHTML = `Ingrédients <em class="fa-solid fa-angle-down angle-down"></em>`;
+  dropbtnPrimary.innerHTML = 'Ingrédients <em class="fa-solid fa-angle-down angle-down"></em>';
   dropbtnPrimary.addEventListener('click', OpenTagIngredient);
 }
 
@@ -64,10 +65,23 @@ function DisplayData(DataRecipe) {
 /* function send data for display TAG ingredients */
 function TagIngredientDisplay(recipes) {
   for (let i = 0; i < recipes.length; i += 1) {
+  
+    array.push(recipes[i].ingredients)
+   
     const tagDom = TagIngredient(recipes[i].ingredients);
-
+    console.log(recipes[i].ingredients)
     dropdownMenu[0].appendChild(tagDom);
   }
+  array.forEach(element => {
+    element.forEach(eleme => {
+      
+      array2.push(eleme.ingredient.toLocaleLowerCase());
+      
+    });
+      console.log(array2)
+      const finalss = [...new Set(array2)];
+      console.log(finalss)
+  });
 }
 
 /* function filter */

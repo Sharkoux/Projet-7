@@ -41,12 +41,12 @@ function TagIngredient(data) {
 
   if (Array.isArray(data) === false) {
     TagIngredients.innerText = `${data}`;
-    return TagIngredients;
-  }
-
-  for (let e = 0; e < data.length; e += 1) {
-    const TagContent = data[e].ingredient;
-    TagIngredients.innerText = `${TagContent}`;
+  } else {
+    for (let e = 0; e < data.length; e += 1) {
+      const TagContent = data[e].ingredient.toLocaleLowerCase();
+      TagIngredients.innerText = `${TagContent}`;
+    }
+    
     return TagIngredients;
   }
 }
