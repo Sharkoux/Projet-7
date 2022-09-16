@@ -90,6 +90,10 @@ header img {
     border-radius: 0 0 5px 5px;
     border: transparent;
 }
+
+.dropdown-menu a {
+    padding-left: 15px
+}
 .active {
     display: flex!important;
     margin-top: -1px;
