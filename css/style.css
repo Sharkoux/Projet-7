@@ -92,7 +92,8 @@ header img {
 }
 
 .dropdown-menu a {
-    padding-left: 15px
+    padding-left: 15px;
+    padding-bottom: 2px
 }
 .active {
     display: flex!important;

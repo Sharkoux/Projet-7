@@ -1,6 +1,6 @@
 function createRecipesCardDOM(data) {
   const {
-    id, name, servings, ingredients, time, description, appliance, ustensils,
+    name, ingredients, time, description,
   } = data;
 
   const article = document.createElement('article');
@@ -40,15 +40,11 @@ function TagIngredient(data) {
   const TagIngredients = document.createElement('a');
   if (Array.isArray(data) === false) {
     TagIngredients.innerHTML = `${data.replace(/^./, data[0].toUpperCase())}`;
-   
   } else {
     for (let e = 0; e < data.length; e += 1) {
       const TagContent = data[e];
       TagIngredients.innerHTML = `${TagContent.replace(/^./, TagContent[0].toUpperCase())}`;
-      
     }
-    
-    
   }
   return TagIngredients;
 }
