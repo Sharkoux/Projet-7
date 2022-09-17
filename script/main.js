@@ -39,7 +39,6 @@ function CloseTagIngredient() {
 
 /* class for format data card */
 class Recipe {
-  
   constructor(datarecipes) {
     this.name = datarecipes.name;
     this.servings = datarecipes.servings;
@@ -48,11 +47,10 @@ class Recipe {
     this.description = datarecipes.description;
     this.appliance = datarecipes.appliance;
     this.ustensils = datarecipes.ustensils;
-    
   }
 
   TAG() {
-    
+
   }
 }
 
@@ -68,16 +66,16 @@ function DisplayData(DataRecipe) {
 
 /* function send data for display TAG ingredients */
 function TagIngredientDisplay(Tagrecipes) {
-  
+  DROPDOWNMENU[0].innerHTML = '';
   for (let i = 0; i < Tagrecipes.length; i += 1) {
-    const  ingredients  = Tagrecipes[i].ingredients;
-    console.log(ingredients)
+    const { ingredients } = Tagrecipes[i];
+    console.log(ingredients);
     for (let j = 0; j < ingredients.length; j += 1) {
       array.push(ingredients[j].ingredient.toLocaleLowerCase());
     }
   }
   const Tag = [...new Set(array)];
-  console.log(Tag)
+  console.log(Tag);
   for (let e = 0; e < Tag.length; e += 1) {
     const Finish = TagIngredient(Tag[e]);
     DROPDOWNMENU[0].appendChild(Finish);
@@ -87,22 +85,40 @@ function TagIngredientDisplay(Tagrecipes) {
 /* function filter */
 function Search(INPUT) {
   if (INPUT.length > 2) {
-    DROPDOWNMENU[0].innerHTML = '';
-    const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(INPUT));
-    const ResultFilters = recipes.filter((item) => item.name.toLocaleLowerCase().includes(INPUT.toLocaleLowerCase())
-    || item.description.includes(INPUT)
-    || filtIngredients(item.ingredients));
+    const ARRAYFILTER = [];
+    
+    
+    
+   // algo search recette full boucle Native
+    for (let z = 0; z < recipes.length; z += 1) {
+      if (recipes[z].name.toLocaleLowerCase().includes(INPUT.toLocaleLowerCase())) {
+        ARRAYFILTER.push(recipes[z]);
+      }
+      if (recipes[z].description.includes(INPUT)) {
+        ARRAYFILTER.push(recipes[z]);
+      }
 
-    
-    RECIPESZONE.innerHTML = '';
-    
-    for (let e = 0; e < ResultFilters.length; e += 1) {
-      console.log(ResultFilters[0].ingredients)
-      const Finish = TagIngredient(ResultFilters[e].ingredient);
+      for (let x = 0; x < recipes[z].ingredients.length; x += 1) {
+        const INGREDIENTS = recipes[z].ingredients;
+        console.log(INGREDIENTS);
+        if (INGREDIENTS[x].ingredient.includes(INPUT)) {
+          ARRAYFILTER.push(recipes[z]);
+        }
+      }
+    }
+
+    console.log(ARRAYFILTER);
+    const RESULTFILTER = [... new Set(ARRAYFILTER)];
+   
+   RECIPESZONE.innerHTML = '';
+    /*
+    for (let e = 0; e < RESULTFILTER.length; e += 1) {
+      console.log(RESULTFILTER[0].ingredients)
+      const Finish = TagIngredient(RESULTFILTER[e].ingredient);
       DROPDOWNMENU[0].appendChild(Finish);
     }
-    
-    DisplayData(ResultFilters);
+    */
+    DisplayData(RESULTFILTER);
   }
 }
 
