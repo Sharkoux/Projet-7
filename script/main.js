@@ -48,6 +48,11 @@ class Recipe {
     this.description = datarecipes.description;
     this.appliance = datarecipes.appliance;
     this.ustensils = datarecipes.ustensils;
+    
+  }
+
+  TAG() {
+    
   }
 }
 
@@ -91,6 +96,11 @@ function Search(INPUT) {
     
     RECIPESZONE.innerHTML = '';
     
+    for (let e = 0; e < ResultFilters.length; e += 1) {
+      console.log(ResultFilters[0].ingredients)
+      const Finish = TagIngredient(ResultFilters[e].ingredient);
+      DROPDOWNMENU[0].appendChild(Finish);
+    }
     
     DisplayData(ResultFilters);
   }
