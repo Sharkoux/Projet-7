@@ -21,6 +21,30 @@ async function DisplayData(backToNumbers) {
   });
 }
 
+
+/* function filter */
+function Search(INPUT) {
+  if (INPUT.length > 2) {
+    DROPDOWNMENU[0].innerHTML = '';
+    const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(INPUT));
+    const ResultFilters = recipes.filter((item) => item.name.toLocaleLowerCase().includes(INPUT.toLocaleLowerCase())
+    || item.description.includes(INPUT)
+    || filtIngredients(item.ingredients));
+
+    
+    RECIPESZONE.innerHTML = '';
+    
+    for (let e = 0; e < ResultFilters.length; e += 1) {
+      console.log(ResultFilters[0].ingredients)
+      const Finish = TagIngredient(ResultFilters[e].ingredient);
+      DROPDOWNMENU[0].appendChild(Finish);
+    }
+    
+    DisplayData(ResultFilters);
+  }
+}
+
+
 async function init() {
   const { backToNumbers } = await GetData();
   DisplayData(backToNumbers);
