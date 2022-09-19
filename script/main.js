@@ -10,6 +10,7 @@ const DROPBTNUSTENCILS = document.querySelector('.btn-danger');
 const DROPDOWNINGREDIENT = document.querySelector('.btn-ingrédients');
 const DROPBTN = document.querySelector('.drop_btn');
 const ALLARROWUP = document.querySelectorAll('.angle-up');
+let ARRAYSEARCHTAG = [];
 let array = [];
 
 /* Event */
@@ -47,6 +48,7 @@ function CloseTagIngredient() {
   DROPDOWNINGREDIENT.classList.remove('active');
   DROPBTNPRIMARY.innerHTML = 'Ingrédients <em class="fa-solid fa-angle-down angle-down"></em>';
   DROPBTNPRIMARY.addEventListener('click', OpenTagIngredient);
+  DROPBTN.style.setProperty('border-radius', '5px');
 }
 
 /* class for format data card */
@@ -60,7 +62,7 @@ class Recipe {
     this.appliance = datarecipes.appliance;
     this.ustensils = datarecipes.ustensils;
     this.availableIngredientsTags = array;
-    this.tag = [];
+    this.tagfilter = ARRAYSEARCHTAG;
   }
 
   /* method for data Tag Ingredients */
@@ -72,12 +74,21 @@ class Recipe {
     const Tag = [...new Set(this.availableIngredientsTags)];
 
     for (let e = 0; e < Tag.length; e += 1) {
-      const Finish = TagIngredient(Tag[e]);
-      DROPDOWNMENU[0].appendChild(Finish);
+      const FINISH = TagIngredient(Tag[e]);
+      DROPDOWNMENU[0].appendChild(FINISH);
     }
-    
   }
-  
+
+  TagFilter() {
+    DROPDOWNMENU[0].innerHTML = '';
+    const Filter = [...new Set(this.tagfilter)];
+    for (let m = 0; m < Filter.length; m += 1) {
+      const FILTERTAG = TagIngredient(Filter[m]);
+      DROPDOWNMENU[0].appendChild(FILTERTAG);
+    }
+
+    console.log(Filter);
+  }
 }
 
 /* function send data recipes */
@@ -124,25 +135,23 @@ function Search(INPUT) {
 }
 
 function TagSearch(INPUTTAG) {
-  const ARRAYSEARCHTAG = [];
- 
-  if (INPUTTAG.length > 2) {
+  ARRAYSEARCHTAG = [];
+  if (INPUTTAG.length > 3) {
     for (let w = 0; w < recipes.length; w += 1) {
       for (let x = 0; x < recipes[w].ingredients.length; x += 1) {
         const TAGS = recipes[w].ingredients;
 
-        if (TAGS[x].ingredient.toLocaleLowerCase().includes(INPUTTAG.toLocaleLowerCase())) {
-         ARRAYSEARCHTAG.push(TAGS[x]);
+        if (TAGS[x].ingredient.includes(INPUTTAG.toLocaleLowerCase())) {
+          ARRAYSEARCHTAG.push(TAGS[x].ingredient.toLocaleLowerCase());
         }
       }
     }
+
+    for (let a = 0; a < ARRAYSEARCHTAG.length; a += 1) {
+      const NEWRECIPES = new Recipe(ARRAYSEARCHTAG[a]);
+      NEWRECIPES.TagFilter();
+    }
   }
-  const Finish = TagIngredient(ARRAYSEARCHTAG);
-  DROPDOWNMENU[0].appendChild(Finish);
 }
 
-
 DisplayData(recipes);
-
-
-
