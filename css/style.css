@@ -56,7 +56,7 @@ header img {
     padding: 15px;
     font-weight: 400;
     text-align: left;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 5px;
     border: 0px transparent;
 }
 
@@ -98,11 +98,12 @@ header img {
 .active {
     display: flex!important;
     margin-top: -1px;
+    
 }
 
 .btn-active {
     width: 650px;
-
+    
 }
 
 .search-ingredients {
