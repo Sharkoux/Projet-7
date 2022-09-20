@@ -10,7 +10,10 @@ const DROPBTNUSTENCILS = document.querySelector('.btn-danger');
 const DROPDOWNINGREDIENT = document.querySelector('.btn-ingrédients');
 const DROPBTN = document.querySelector('.drop_btn');
 const ALLARROWUP = document.querySelectorAll('.angle-up');
-let ARRAYSEARCHTAG = [];
+const Nav = document.querySelector('nav');
+const filterZone = document.querySelector('.filter');
+
+let arraysearchtag = [];
 let array = [];
 
 /* Event */
@@ -29,7 +32,8 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-/* function open / close */
+
+/* function open / close filter */
 
 function OpenTagIngredient() {
   DROPDOWNINGREDIENT.classList.toggle('active');
@@ -42,6 +46,7 @@ function OpenTagIngredient() {
     const INPUTTAG = SEARCHTAG.value.trim();
     TagSearch(INPUTTAG);
   });
+
 }
 
 function CloseTagIngredient() {
@@ -62,14 +67,14 @@ class Recipe {
     this.appliance = datarecipes.appliance;
     this.ustensils = datarecipes.ustensils;
     this.availableIngredientsTags = array;
-    this.tagfilter = ARRAYSEARCHTAG;
+    this.tagfilter = arraysearchtag;
   }
 
-  /* method for data Tag Ingredients */
+  /* method for all Tag Ingredients */
   TagIngredientAvailable() {
     DROPDOWNMENU[0].innerHTML = '';
     for (let j = 0; j < this.ingredients.length; j += 1) {
-      this.availableIngredientsTags.push(this.ingredients[j].ingredient.toLocaleLowerCase());
+      this.availableIngredientsTags.push(this.ingredients[j].ingredient.toLowerCase());
     }
     const Tag = [...new Set(this.availableIngredientsTags)];
 
@@ -78,7 +83,7 @@ class Recipe {
       DROPDOWNMENU[0].appendChild(FINISH);
     }
   }
-
+  /* method for filter Tags */
   TagFilter() {
     DROPDOWNMENU[0].innerHTML = '';
     const Filter = [...new Set(this.tagfilter)];
@@ -102,6 +107,15 @@ function DisplayData(DataRecipe) {
     const recipesDOM = createRecipesCardDOM(NEWRECIPES);
     RECIPESZONE.appendChild(recipesDOM);
   }
+  const LINKTAG = document.querySelectorAll('.linkTag');
+  for(let p = 0; p < LINKTAG.length; p += 1) {
+  LINKTAG[p].addEventListener('click', () => {
+  const LINK = LINKTAG[p].innerHTML;
+  Addlinktag(LINK);
+  });
+}
+
+
 }
 
 /* function filter */
@@ -111,17 +125,17 @@ function Search(INPUT) {
 
     // algo search recette full boucle Native
     for (let z = 0; z < recipes.length; z += 1) {
-      if (recipes[z].name.toLocaleLowerCase().includes(INPUT.toLocaleLowerCase())) {
+      if (recipes[z].name.toLowerCase().indexOf(INPUT.toLowerCase()) > -1) {
         ARRAYFILTER.push(recipes[z]);
       }
-      if (recipes[z].description.includes(INPUT.toLocaleLowerCase())) {
+      if (recipes[z].description.toLowerCase().indexOf(INPUT.toLowerCase()) > -1) {
         ARRAYFILTER.push(recipes[z]);
       }
 
       for (let x = 0; x < recipes[z].ingredients.length; x += 1) {
         const INGREDIENTS = recipes[z].ingredients;
 
-        if (INGREDIENTS[x].ingredient.includes(INPUT.toLocaleLowerCase())) {
+        if (INGREDIENTS[x].ingredient.toLowerCase().indexOf(INPUT.toLowerCase()) > -1) {
           ARRAYFILTER.push(recipes[z]);
         }
       }
@@ -135,23 +149,32 @@ function Search(INPUT) {
 }
 
 function TagSearch(INPUTTAG) {
-  ARRAYSEARCHTAG = [];
-  if (INPUTTAG.length > 3) {
+  arraysearchtag = [];
+  if (INPUTTAG.length > 2) {
     for (let w = 0; w < recipes.length; w += 1) {
       for (let x = 0; x < recipes[w].ingredients.length; x += 1) {
         const TAGS = recipes[w].ingredients;
 
-        if (TAGS[x].ingredient.includes(INPUTTAG.toLocaleLowerCase())) {
-          ARRAYSEARCHTAG.push(TAGS[x].ingredient.toLocaleLowerCase());
+        if (TAGS[x].ingredient.toLowerCase().indexOf(INPUTTAG.toLowerCase()) > -1) {
+          arraysearchtag.push(TAGS[x].ingredient.toLowerCase());
+          console.log(TAGS[x].ingredient.toLowerCase());
         }
       }
     }
 
-    for (let a = 0; a < ARRAYSEARCHTAG.length; a += 1) {
-      const NEWRECIPES = new Recipe(ARRAYSEARCHTAG[a]);
+    for (let a = 0; a < arraysearchtag.length; a += 1) {
+      const NEWRECIPES = new Recipe(arraysearchtag[a]);
       NEWRECIPES.TagFilter();
     }
   }
 }
+
+function Addlinktag(LINK) {
+console.log(LINK);
+const ADDTAGS = Addtag(LINK);
+Nav.appendChild(ADDTAGS);
+Nav.insertBefore(ADDTAGS, filterZone);
+}
+
 
 DisplayData(recipes);

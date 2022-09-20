@@ -38,6 +38,7 @@ function createRecipesCardDOM(data) {
 
 function TagIngredient(data) {
   const TagIngredients = document.createElement('a');
+  TagIngredients.setAttribute("class", "linkTag");
   if (Array.isArray(data) === false) {
     TagIngredients.innerHTML = `${data.replace(/^./, data[0].toUpperCase())}`;
   } else {
@@ -47,4 +48,10 @@ function TagIngredient(data) {
     }
   }
   return TagIngredients;
+}
+
+function Addtag(data) {
+  const Addtags = document.createElement("div");
+  Addtags.innerHTML = `<p>${data}</p>`
+  return Addtags;
 }
