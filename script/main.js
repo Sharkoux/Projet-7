@@ -10,11 +10,13 @@ const DROPBTNUSTENCILS = document.querySelector('.btn-danger');
 const DROPDOWNINGREDIENT = document.querySelector('.btn-ingrédients');
 const DROPBTN = document.querySelector('.drop_btn');
 const ALLARROWUP = document.querySelectorAll('.angle-up');
-const Nav = document.querySelector('nav');
+const DivTag = document.querySelector('.divtag');
 const filterZone = document.querySelector('.filter');
 
 let arraysearchtag = [];
 let array = [];
+const arrayTag = [];
+const ARRAYFILTERTAG = [];
 
 /* Event */
 
@@ -32,7 +34,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-
 /* function open / close filter */
 
 function OpenTagIngredient() {
@@ -46,7 +47,13 @@ function OpenTagIngredient() {
     const INPUTTAG = SEARCHTAG.value.trim();
     TagSearch(INPUTTAG);
   });
-
+  const LINKTAG = document.querySelectorAll('.linkTag');
+  for (let p = 0; p < LINKTAG.length; p += 1) {
+    LINKTAG[p].addEventListener('click', () => {
+      const LINK = LINKTAG[p].innerHTML;
+      Addlinktag(LINK);
+    });
+  }
 }
 
 function CloseTagIngredient() {
@@ -83,6 +90,7 @@ class Recipe {
       DROPDOWNMENU[0].appendChild(FINISH);
     }
   }
+
   /* method for filter Tags */
   TagFilter() {
     DROPDOWNMENU[0].innerHTML = '';
@@ -91,8 +99,6 @@ class Recipe {
       const FILTERTAG = TagIngredient(Filter[m]);
       DROPDOWNMENU[0].appendChild(FILTERTAG);
     }
-
-    console.log(Filter);
   }
 }
 
@@ -107,15 +113,6 @@ function DisplayData(DataRecipe) {
     const recipesDOM = createRecipesCardDOM(NEWRECIPES);
     RECIPESZONE.appendChild(recipesDOM);
   }
-  const LINKTAG = document.querySelectorAll('.linkTag');
-  for(let p = 0; p < LINKTAG.length; p += 1) {
-  LINKTAG[p].addEventListener('click', () => {
-  const LINK = LINKTAG[p].innerHTML;
-  Addlinktag(LINK);
-  });
-}
-
-
 }
 
 /* function filter */
@@ -146,8 +143,15 @@ function Search(INPUT) {
 
     DisplayData(RESULTFILTER);
   }
+  const LINKTAG = document.querySelectorAll('.linkTag');
+  for (let p = 0; p < LINKTAG.length; p += 1) {
+    LINKTAG[p].addEventListener('click', () => {
+      const LINK = LINKTAG[p].innerHTML;
+      Addlinktag(LINK);
+    });
+  }
 }
-
+/* function TAG search Ingredient */
 function TagSearch(INPUTTAG) {
   arraysearchtag = [];
   if (INPUTTAG.length > 2) {
@@ -166,15 +170,54 @@ function TagSearch(INPUTTAG) {
       const NEWRECIPES = new Recipe(arraysearchtag[a]);
       NEWRECIPES.TagFilter();
     }
+    const LINKTAG = document.querySelectorAll('.linkTag');
+    for (let p = 0; p < LINKTAG.length; p += 1) {
+      LINKTAG[p].addEventListener('click', () => {
+        const LINK = LINKTAG[p].innerHTML;
+        Addlinktag(LINK);
+      });
+    }
   }
 }
 
 function Addlinktag(LINK) {
-console.log(LINK);
-const ADDTAGS = Addtag(LINK);
-Nav.appendChild(ADDTAGS);
-Nav.insertBefore(ADDTAGS, filterZone);
-}
+  let END = [];
+  if (!DivTag.innerHTML) {
+    const ADDTAGS = Addtag(LINK);
+    DivTag.appendChild(ADDTAGS);
+    arrayTag.push(LINK);
+  } else if (DivTag.innerHTML.indexOf(LINK) === -1) {
+    const ADDTAGS = Addtag(LINK);
+    DivTag.appendChild(ADDTAGS);
+    arrayTag.push(LINK);
+  }
 
+  for (let n = 0; n < recipes.length; n += 1) {
+    for (let x = 0; x < recipes[n].ingredients.length; x += 1) {
+      const INGREDIENTS = recipes[n].ingredients;
+        if (INGREDIENTS[x].ingredient.toLowerCase().indexOf(arrayTag[0].toLowerCase()) > -1) {
+          ARRAYFILTERTAG.push(recipes[n]);
+          END = [...new Set(ARRAYFILTERTAG)];
+          RECIPESZONE.innerHTML = '';
+          DisplayData(END);
+      }
+      
+    }
+  }   
+      let TagEnd = [];
+      
+         for(let p = 0; p < END.length; p += 1) {
+          for (let x = 0; x < END[p].ingredients.length; x += 1) {
+            const INGREDIENTsS = recipes[p].ingredients;
+            if(INGREDIENTsS[x].ingredient.toLowerCase().indexOf(arrayTag[1].toLowerCase()) > -1) {
+               TagEnd.push(END[p]);
+              let ENDs = [...new Set(TagEnd)];
+              console.log(ENDs)
+              RECIPESZONE.innerHTML = '';
+              DisplayData(ENDs);
+            }
+          }
+        }
+}
 
 DisplayData(recipes);

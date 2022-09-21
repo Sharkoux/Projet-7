@@ -52,6 +52,7 @@ function TagIngredient(data) {
 
 function Addtag(data) {
   const Addtags = document.createElement("div");
-  Addtags.innerHTML = `<p>${data}</p>`
+  Addtags.setAttribute("class", "divtags")
+  Addtags.innerHTML = `<p>${data}</p><i class="fa-regular fa-circle-xmark supTag"></i>`
   return Addtags;
 }

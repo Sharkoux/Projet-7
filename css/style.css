@@ -218,3 +218,30 @@ article {
     overflow: hidden;
     
 }
+
+/* Tag */
+
+.divtag {
+    display: flex;
+}
+
+.divtags {
+    display: flex;
+    background: #3282F7;
+    color: white;
+    margin: 10px;
+    padding: 10px;
+    width: 130px;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+.divtags p {
+    margin: 0px;
+    margin-right: 5px;
+}
+
+.supTag {
+    font-size: large;
+}
