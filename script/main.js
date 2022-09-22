@@ -15,7 +15,7 @@ const filterZone = document.querySelector('.filter');
 
 let arraysearchtag = [];
 let array = [];
-let arrayTag = [];
+const arrayTag = [];
 let RESULTFILTER = [];
 const ARRAYFILTERTAG = [];
 
@@ -106,31 +106,29 @@ class Recipe {
 
   LinkTags() {
     console.log(this.linksTags);
-    
+
     for (let n = 0; n < this.resultfilters.length; n += 1) {
-    for (let x = 0; x < this.resultfilters[n].ingredients.length; x += 1) {
-      const INGREDIENTS = this.resultfilters[n].ingredients;
-      for(let k = 0; k < this.linksTags.length; k += 1) {
-      if (INGREDIENTS[x].ingredient.toLowerCase().indexOf(this.linksTags[0].toLowerCase() && this.linksTags[k].toLowerCase()) > -1) {
-        ARRAYFILTERTAG.push(this.resultfilters[n]);
-        console.log(ARRAYFILTERTAG)
-        let END = [...new Set(ARRAYFILTERTAG)];
-        RECIPESZONE.innerHTML = '';
-        DisplayData(END);
+      for (let x = 0; x < this.resultfilters[n].ingredients.length; x += 1) {
+        const INGREDIENTS = this.resultfilters[n].ingredients;
+        for (let k = 0; k < this.linksTags.length; k += 1) {
+          if (INGREDIENTS[x].ingredient.toLowerCase().indexOf(this.linksTags[0].toLowerCase() && this.linksTags[k].toLowerCase()) > -1) {
+            ARRAYFILTERTAG.push(this.resultfilters[n]);
+            console.log(ARRAYFILTERTAG);
+            const END = [...new Set(ARRAYFILTERTAG)];
+            RECIPESZONE.innerHTML = '';
+            DisplayData(END);
+          }
+        }
       }
-      
     }
-    }
-  }
   }
 }
-
 
 /* function send data recipes */
 
 function DisplayData(DataRecipe) {
   array = [];
-  
+
   DROPDOWNMENU[0].innerHTML = '';
   for (let a = 0; a < DataRecipe.length; a += 1) {
     const NEWRECIPES = new Recipe(DataRecipe[a]);
@@ -139,7 +137,7 @@ function DisplayData(DataRecipe) {
     RECIPESZONE.appendChild(recipesDOM);
     RESULTFILTER = DataRecipe;
   }
-  
+
   const LINKTAG = document.querySelectorAll('.linkTag');
   for (let p = 0; p < LINKTAG.length; p += 1) {
     LINKTAG[p].addEventListener('click', () => {
@@ -153,8 +151,6 @@ function DisplayData(DataRecipe) {
 function Search(INPUT) {
   const ARRAYFILTER = [];
   if (INPUT.length > 2) {
-    
-
     // algo search recette full boucle Native
     for (let z = 0; z < recipes.length; z += 1) {
       if (recipes[z].name.toLowerCase().indexOf(INPUT.toLowerCase()) > -1) {
@@ -174,7 +170,7 @@ function Search(INPUT) {
     }
 
     RESULTFILTER = [...new Set(ARRAYFILTER)];
-    
+
     RECIPESZONE.innerHTML = '';
 
     DisplayData(RESULTFILTER);
@@ -210,7 +206,6 @@ function TagSearch(INPUTTAG) {
 }
 
 function Addlinktag(LINK) {
-  
   if (!DivTag.innerHTML) {
     const ADDTAGS = Addtag(LINK);
     DivTag.appendChild(ADDTAGS);
@@ -220,10 +215,10 @@ function Addlinktag(LINK) {
     DivTag.appendChild(ADDTAGS);
     arrayTag.push(LINK);
   }
-  
+
   const arrayTags = new Recipe(arrayTag);
   arrayTags.LinkTags();
-  
+
 /*
   for (let n = 0; n < recipes.length; n += 1) {
     for (let x = 0; x < recipes[n].ingredients.length; x += 1) {
