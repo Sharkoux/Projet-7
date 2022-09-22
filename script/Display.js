@@ -38,7 +38,7 @@ function createRecipesCardDOM(data) {
 
 function TagIngredient(data) {
   const TagIngredients = document.createElement('a');
-  TagIngredients.setAttribute("class", "linkTag");
+  TagIngredients.setAttribute('class', 'linkTag');
   if (Array.isArray(data) === false) {
     TagIngredients.innerHTML = `${data.replace(/^./, data[0].toUpperCase())}`;
   } else {
@@ -51,8 +51,8 @@ function TagIngredient(data) {
 }
 
 function Addtag(data) {
-  const Addtags = document.createElement("div");
-  Addtags.setAttribute("class", "divtags")
-  Addtags.innerHTML = `<p>${data}</p><i class="fa-regular fa-circle-xmark supTag"></i>`
+  const Addtags = document.createElement('div');
+  Addtags.setAttribute('class', 'divtags');
+  Addtags.innerHTML = `<p>${data}</p><i class="fa-regular fa-circle-xmark supTag"></i>`;
   return Addtags;
 }
