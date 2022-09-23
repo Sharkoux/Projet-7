@@ -86,7 +86,7 @@ header img {
     flex-wrap: wrap;
     color: white;
     padding: 10px;
-    overflow: hidden;
+    overflow: scroll;
     border-radius: 0 0 5px 5px;
     border: transparent;
 }

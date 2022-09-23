@@ -21,9 +21,12 @@ const ARRAYFILTERTAG = [];
 
 /* Event */
 
-SEARCHINPUT.addEventListener('keyup', () => {
-  const INPUT = SEARCHINPUT.value.trim();
-  Search(INPUT);
+SEARCHINPUT.addEventListener('input', () => {
+  const INPUT = SEARCHINPUT.value;
+  console.log(INPUT.length);
+  
+  Search(INPUT);  
+  
 });
 
 DROPBTNPRIMARY.addEventListener('click', OpenTagIngredient);
@@ -44,7 +47,7 @@ function OpenTagIngredient() {
   DROPBTNPRIMARY.removeEventListener('click', OpenTagIngredient);
   const SEARCHTAG = document.querySelector('.search-ingredients');
 
-  SEARCHTAG.addEventListener('keyup', () => {
+  SEARCHTAG.addEventListener('input', () => {
     const INPUTTAG = SEARCHTAG.value.trim();
     TagSearch(INPUTTAG);
   });
@@ -148,9 +151,9 @@ function DisplayData(DataRecipe) {
 }
 
 /* function filter */
-function Search(INPUT) {
+ function Search(INPUT) {
   const ARRAYFILTER = [];
-  if (INPUT.length > 2) {
+
     // algo search recette full boucle Native
     for (let z = 0; z < recipes.length; z += 1) {
       if (recipes[z].name.toLowerCase().indexOf(INPUT.toLowerCase()) > -1) {
@@ -174,19 +177,19 @@ function Search(INPUT) {
     RECIPESZONE.innerHTML = '';
 
     DisplayData(RESULTFILTER);
-  }
+  
 }
 /* function TAG search Ingredient */
 function TagSearch(INPUTTAG) {
   arraysearchtag = [];
-  if (INPUTTAG.length > 2) {
+ 
     for (let w = 0; w < recipes.length; w += 1) {
       for (let x = 0; x < recipes[w].ingredients.length; x += 1) {
         const TAGS = recipes[w].ingredients;
 
         if (TAGS[x].ingredient.toLowerCase().indexOf(INPUTTAG.toLowerCase()) > -1) {
           arraysearchtag.push(TAGS[x].ingredient.toLowerCase());
-          console.log(TAGS[x].ingredient.toLowerCase());
+          
         }
       }
     }
@@ -202,7 +205,7 @@ function TagSearch(INPUTTAG) {
         Addlinktag(LINK);
       });
     }
-  }
+  
 }
 
 function Addlinktag(LINK) {
