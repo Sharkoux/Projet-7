@@ -6,26 +6,25 @@
 import { recipes } from '../data/recipes.js';
 import { Includes, GetRessource } from './helper.js';
 
-
 const SEARCHINPUT = document.querySelector('.input_search');
-
 const RECIPESZONE = document.querySelector('.recipes_card');
 const DROPDOWNMENU = document.querySelectorAll('.dropdown-menu');
 const DROPBTNPRIMARY = document.querySelector('.btn-primary');
 const DROPBTNAPPAREILS = document.querySelector('.btn-appareils');
 const DROPBTNUSTENCILS = document.querySelector('.btn-danger');
 const DROPDOWNINGREDIENT = document.querySelector('.btn-ingrédients');
-const DROPBTN = document.querySelector('.drop_btn');
-const ALLARROWUP = document.querySelectorAll('.angle-up');
+const DROPBTN = document.querySelectorAll('.drop_btn');
+const ROWUP = document.querySelectorAll('.angle-up');
 const DivTag = document.querySelector('.divtag');
-const filterZone = document.querySelector('.filter');
 
 let arraysearchtag = [];
 let array = [];
-const arrayTag = [];
+let arrays = [];
+let arrayUstensils = [];
+let arrayTag = [];
 let RESULTFILTER = [];
-const ARRAYFILTERTAG = [];
-
+let ARRAYFILTERTAG = [];
+let link = [];
 /* Event */
 
 SEARCHINPUT.addEventListener('input', () => {
@@ -36,20 +35,30 @@ SEARCHINPUT.addEventListener('input', () => {
 });
 
 DROPBTNPRIMARY.addEventListener('click', OpenTagIngredient);
+DROPBTNAPPAREILS.addEventListener('click', OpenTagAppareils);
+DROPBTNUSTENCILS.addEventListener('click', OpenTagUstensiles);
+
+
 
 document.addEventListener('keydown', (e) => {
   const KEYCODE = e.KEYCODE ? e.KEYCODE : e.which;
   if (KEYCODE === 27) {
     CloseTagIngredient();
+    CloseTagAppareil();
+    CloseTagUstensils();
   }
 });
 
+
+
+
 /* function open / close filter */
 
+/* Open Ingredient */
 function OpenTagIngredient() {
   DROPDOWNINGREDIENT.classList.toggle('active');
-  DROPBTN.style.setProperty('border-radius', '5px 5px 0 0');
-  DROPBTNPRIMARY.innerHTML = '<input class="input form-control search-ingredients" type="text" placeholder="Rechercher un ingrédient"></input><em class="fa-solid fa-angle-up angle-up"></em>';
+  DROPBTN[0].style.setProperty('border-radius', '5px 5px 0 0');
+  DROPBTNPRIMARY.innerHTML = '<input class="input form-control search-ingredients blue" type="text" placeholder="Rechercher un ingrédient"></input><em class="fa-solid fa-angle-up angle-up"></em>';
   DROPBTNPRIMARY.removeEventListener('click', OpenTagIngredient);
   const SEARCHTAG = document.querySelector('.search-ingredients');
 
@@ -70,7 +79,69 @@ function CloseTagIngredient() {
   DROPDOWNINGREDIENT.classList.remove('active');
   DROPBTNPRIMARY.innerHTML = 'Ingrédients <em class="fa-solid fa-angle-down angle-down"></em>';
   DROPBTNPRIMARY.addEventListener('click', OpenTagIngredient);
-  DROPBTN.style.setProperty('border-radius', '5px');
+  DROPBTN[0].style.setProperty('border-radius', '5px');
+}
+
+/* Open Appareils */
+
+function OpenTagAppareils() {
+  document.querySelector('.btn_appareils').classList.toggle('active');
+  DROPBTN[1].style.setProperty('border-radius', '5px 5px 0 0');
+  document.querySelector('.btn-appareils').innerHTML = '<input class="input form-control search-appareils green" type="text" placeholder="Rechercher un appareils"></input><em class="fa-solid fa-angle-up angle-up"></em>';
+  document.querySelector('.btn-appareils').removeEventListener('click', OpenTagAppareils);
+  const SEARCHTAG = document.querySelector('.search-appareils');
+  
+    /*
+  SEARCHTAG.addEventListener('input', () => {
+    const INPUTTAG = SEARCHTAG.value.trim();
+    TagSearch(INPUTTAG);
+  });
+  const LINKTAG = document.querySelectorAll('.linkTag');
+  for (let i = 0; i < LINKTAG.length; i += 1) {
+    LINKTAG[i].addEventListener('click', () => {
+      const LINK = LINKTAG[i].innerHTML;
+      Addlinktag(LINK);
+    });
+  }
+  */
+}
+
+function CloseTagAppareil() {
+  document.querySelector('.btn_appareils').classList.remove('active');
+  document.querySelector('.btn-appareils').innerHTML = 'Appareils <em class="fa-solid fa-angle-down angle-down"></em>';
+  document.querySelector('.btn-appareils').addEventListener('click', OpenTagAppareils);
+  DROPBTN[1].style.setProperty('border-radius', '5px');
+}
+
+/* Open Ustensiles */ 
+
+function OpenTagUstensiles() {
+  document.querySelector('.btn_danger').classList.toggle('active');
+  DROPBTN[2].style.setProperty('border-radius', '5px 5px 0 0');
+  document.querySelector('.btn-danger').innerHTML = '<input class="input form-control search-ustensils red" type="text" placeholder="Rechercher un ustensiles"></input><em class="fa-solid fa-angle-up angle-up"></em>';
+  document.querySelector('.btn-danger').removeEventListener('click', OpenTagUstensiles);
+  const SEARCHTAG = document.querySelector('.search-ustensils');
+
+    /*
+  SEARCHTAG.addEventListener('input', () => {
+    const INPUTTAG = SEARCHTAG.value.trim();
+    TagSearch(INPUTTAG);
+  });
+  const LINKTAG = document.querySelectorAll('.linkTag');
+  for (let i = 0; i < LINKTAG.length; i += 1) {
+    LINKTAG[i].addEventListener('click', () => {
+      const LINK = LINKTAG[i].innerHTML;
+      Addlinktag(LINK);
+    });
+  }
+  */
+}
+
+function CloseTagUstensils() {
+  document.querySelector('.btn_danger').classList.remove('active');
+  document.querySelector('.btn-danger').innerHTML = 'Ustensiles <em class="fa-solid fa-angle-down angle-down"></em>';
+  document.querySelector('.btn-danger').addEventListener('click', OpenTagUstensiles);
+  DROPBTN[2].style.setProperty('border-radius', '5px');
 }
 
 /* class for format data card */
@@ -84,9 +155,12 @@ class Recipe {
     this.appliance = datarecipes.appliance;
     this.ustensils = datarecipes.ustensils;
     this.availableIngredientsTags = array;
+    this.availableApplianceTags = arrays;
+    this.availableUstensilsTag = arrayUstensils;
     this.tagfilter = arraysearchtag;
     this.linksTags = arrayTag;
     this.resultfilters = RESULTFILTER;
+    this.link = link;
   }
 
   /* method for all Tag Ingredients */
@@ -101,7 +175,31 @@ class Recipe {
       const FINISH = TagIngredient(Tag[k]);
       DROPDOWNMENU[0].appendChild(FINISH);
     }
+    
+    DROPDOWNMENU[1].innerHTML = '';
+    for (let i = 0; i < this.appliance.length; i += 1) {
+      this.availableApplianceTags.push(this.appliance.toLowerCase());
+    }
+    const TagApp = [...new Set(this.availableApplianceTags)];
+    
+    for (let k = 0; k < TagApp.length; k += 1) {
+      const FINISH = TagIngredient(TagApp[k]);
+      DROPDOWNMENU[1].appendChild(FINISH);
+    }
+
+    DROPDOWNMENU[2].innerHTML = '';
+    for (let i = 0; i < this.ustensils.length; i += 1) {
+      this.availableUstensilsTag.push(this.ustensils[i].toLowerCase());
+    }
+    const TagUs = [...new Set(this.availableUstensilsTag)];
+    
+    for (let k = 0; k < TagUs.length; k += 1) {
+      const FINISH = TagIngredient(TagUs[k]);
+      DROPDOWNMENU[2].appendChild(FINISH);
+    }
+ 
   }
+
 
   /* method for filter Tags */
   TagFilter() {
@@ -114,20 +212,18 @@ class Recipe {
   }
 
   LinkTags() {
-    let newlist = [];
-
+  const newlist = [];
+   console.log(this.link)
     for (let i = 0; i < this.resultfilters.length; i += 1) {
-    
-      const INGREDIENTS = GetRessource(this.resultfilters[i]); // ingredient list by recipe
-      //console.log(INGREDIENTS)
+      const INGREDIENTS = GetRessource(this.resultfilters[i]);
+   
       let flag = 0;
 
       for (let j = 0; j < this.linksTags.length; j += 1) {
         const currentTag = this.linksTags[j];
-        console.log(currentTag)
+
         for (let k = 0; k < INGREDIENTS.length; k += 1) {
-          console.log(INGREDIENTS[j])
-          if (INGREDIENTS[j] === currentTag) {
+          if (INGREDIENTS[k].toLowerCase() === currentTag.toLowerCase()) {
             flag += 1;
             break;
           }
@@ -138,11 +234,26 @@ class Recipe {
         newlist.push(this.resultfilters[i]);
       }
     }
+
     
+    for(let i = 0; i < this.linksTags.length; i += 1){
+      if(Includes(this.linksTags[i].toLowerCase().trim(), this.link[0].toLowerCase().trim()) === true){
+   
+        newlist.splice([i], 1);
+      }
+    }
+    
+  
+  
+
+
+    RECIPESZONE.innerHTML = '';
     DisplayData(newlist);
+    
+  
   }
 }
-   
+
 /* function send data recipes */
 
 function DisplayData(DataRecipe) {
@@ -232,37 +343,23 @@ function Addlinktag(LINK) {
     DivTag.appendChild(ADDTAGS);
     arrayTag.push(LINK);
   }
+  console.log(arrayTag)
 
-  const arrayTags = new Recipe(arrayTag);
-  arrayTags.LinkTags();
+    
+const supTag = document.querySelectorAll('.divtags');
+for (let i = 0; i < supTag.length; i += 1) {
+supTag[i].addEventListener('click', () => {
+link.push(supTag[i].firstChild.innerHTML);
 
-/*
-  for (let n = 0; n < recipes.length; n += 1) {
-    for (let x = 0; x < recipes[n].ingredients.length; x += 1) {
-      const INGREDIENTS = recipes[n].ingredients;
-      if (INGREDIENTS[x].ingredient.toLowerCase().indexOf(arrayTag[0].toLowerCase()) > -1) {
-        ARRAYFILTERTAG.push(recipes[n]);
-        END = [...new Set(ARRAYFILTERTAG)];
-        RECIPESZONE.innerHTML = '';
-        DisplayData(END);
-      }
-    }
-  }
-  const TagEnd = [];
 
-  for (let p = 0; p < END.length; p += 1) {
-    for (let x = 0; x < END[p].ingredients.length; x += 1) {
-      const INGREDIENTsS = END[p].ingredients;
-      if (INGREDIENTsS[x].ingredient.toLowerCase().indexOf(arrayTag[1].toLowerCase()) > -1) {
-        TagEnd.push(END[p]);
-        const ENDs = [...new Set(TagEnd)];
-        console.log(ENDs);
-        RECIPESZONE.innerHTML = '';
-        DisplayData(ENDs);
-      }
-    }
-  }
-  */
+});
+
+}
+
+const arrayTags = new Recipe(arrayTag);
+arrayTags.LinkTags();
+
+  
 }
 
 DisplayData(recipes);

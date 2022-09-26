@@ -24,6 +24,21 @@ header img {
     margin-bottom: 20px;
 }
 
+
+
+.blue { 
+    background:#007bff!important;
+}
+
+.green {
+    background: #68d9a4!important;
+}
+
+.red {
+    background: #dc3545!important;
+}
+
+
 /* Navigation */
 
 .form_search {
@@ -61,7 +76,7 @@ header img {
 }
 
 .angle-up {
-   z-index: 1000;
+   
     position: absolute;
     left: 610px;
     top: 20px
@@ -81,7 +96,6 @@ header img {
 .dropdown-menu {
     width: 650px;
     max-height: 400px ;
-    background-color:#007bff ;
     flex-direction: column;
     flex-wrap: wrap;
     color: white;
@@ -90,6 +104,8 @@ header img {
     border-radius: 0 0 5px 5px;
     border: transparent;
 }
+
+
 
 .dropdown-menu a {
     padding-left: 15px;
@@ -106,16 +122,22 @@ header img {
     
 }
 
-.search-ingredients {
+.search-ingredients,
+.search-appareils,
+.search-ustensils {
     width: 580px;
     color: white!important;
-    background: #007bff!important ;
     border: transparent;
     padding: 0px!important;
     margin-right: 40px;
 }
 
-.search-ingredients::placeholder {
+
+
+
+.search-ingredients::placeholder,
+.search-appareils::placeholder,
+.search-ustensils::placeholder {
     color: white!important;
     opacity: 0.5;
 }

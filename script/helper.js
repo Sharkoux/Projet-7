@@ -1,5 +1,3 @@
-let test = [];
-
 export const Includes = (str, t) => {
   let flag = false;
   for (let i = 0; i < str.length; i++) {
@@ -15,12 +13,10 @@ export const Includes = (str, t) => {
 };
 
 export const GetRessource = (recipe) => {
-    let Ressource = recipe.ingredients;
-    for( let i = 0; i < Ressource.length; i += 1) {
-        test.push(Ressource[i].ingredient);
-        console.log(test)
-        return test;
-    }
-    
-   
+  const Rsc = [];
+
+  for (let i = 0; i < recipe.ingredients.length; i++) {
+    Rsc.push(recipe.ingredients[i].ingredient);
+  }
+  return Rsc;
 };
