@@ -19,12 +19,13 @@ const DivTag = document.querySelector('.divtag');
 
 let arraysearchtag = [];
 let array = [];
-let arrays = [];
-let arrayUstensils = [];
-let arrayTag = [];
+const arrays = [];
+const arrayUstensils = [];
+const arrayTag = [];
 let RESULTFILTER = [];
-let ARRAYFILTERTAG = [];
-let link = [];
+const ARRAYFILTERTAG = [];
+const link = [];
+let newlist = [];
 /* Event */
 
 SEARCHINPUT.addEventListener('input', () => {
@@ -38,8 +39,6 @@ DROPBTNPRIMARY.addEventListener('click', OpenTagIngredient);
 DROPBTNAPPAREILS.addEventListener('click', OpenTagAppareils);
 DROPBTNUSTENCILS.addEventListener('click', OpenTagUstensiles);
 
-
-
 document.addEventListener('keydown', (e) => {
   const KEYCODE = e.KEYCODE ? e.KEYCODE : e.which;
   if (KEYCODE === 27) {
@@ -48,9 +47,6 @@ document.addEventListener('keydown', (e) => {
     CloseTagUstensils();
   }
 });
-
-
-
 
 /* function open / close filter */
 
@@ -90,8 +86,8 @@ function OpenTagAppareils() {
   document.querySelector('.btn-appareils').innerHTML = '<input class="input form-control search-appareils green" type="text" placeholder="Rechercher un appareils"></input><em class="fa-solid fa-angle-up angle-up"></em>';
   document.querySelector('.btn-appareils').removeEventListener('click', OpenTagAppareils);
   const SEARCHTAG = document.querySelector('.search-appareils');
-  
-    /*
+
+  /*
   SEARCHTAG.addEventListener('input', () => {
     const INPUTTAG = SEARCHTAG.value.trim();
     TagSearch(INPUTTAG);
@@ -113,7 +109,7 @@ function CloseTagAppareil() {
   DROPBTN[1].style.setProperty('border-radius', '5px');
 }
 
-/* Open Ustensiles */ 
+/* Open Ustensiles */
 
 function OpenTagUstensiles() {
   document.querySelector('.btn_danger').classList.toggle('active');
@@ -122,7 +118,7 @@ function OpenTagUstensiles() {
   document.querySelector('.btn-danger').removeEventListener('click', OpenTagUstensiles);
   const SEARCHTAG = document.querySelector('.search-ustensils');
 
-    /*
+  /*
   SEARCHTAG.addEventListener('input', () => {
     const INPUTTAG = SEARCHTAG.value.trim();
     TagSearch(INPUTTAG);
@@ -160,6 +156,7 @@ class Recipe {
     this.tagfilter = arraysearchtag;
     this.linksTags = arrayTag;
     this.resultfilters = RESULTFILTER;
+    this.newlist = newlist;
     this.link = link;
   }
 
@@ -175,13 +172,13 @@ class Recipe {
       const FINISH = TagIngredient(Tag[k]);
       DROPDOWNMENU[0].appendChild(FINISH);
     }
-    
+
     DROPDOWNMENU[1].innerHTML = '';
     for (let i = 0; i < this.appliance.length; i += 1) {
       this.availableApplianceTags.push(this.appliance.toLowerCase());
     }
     const TagApp = [...new Set(this.availableApplianceTags)];
-    
+
     for (let k = 0; k < TagApp.length; k += 1) {
       const FINISH = TagIngredient(TagApp[k]);
       DROPDOWNMENU[1].appendChild(FINISH);
@@ -192,14 +189,12 @@ class Recipe {
       this.availableUstensilsTag.push(this.ustensils[i].toLowerCase());
     }
     const TagUs = [...new Set(this.availableUstensilsTag)];
-    
+
     for (let k = 0; k < TagUs.length; k += 1) {
       const FINISH = TagIngredient(TagUs[k]);
       DROPDOWNMENU[2].appendChild(FINISH);
     }
- 
   }
-
 
   /* method for filter Tags */
   TagFilter() {
@@ -210,13 +205,37 @@ class Recipe {
       DROPDOWNMENU[0].appendChild(FILTERTAG);
     }
   }
+  
+
+  DeleteLink() {
+    this.link = link;
+    console.log(this.linksTags);
+   
+      for (let i = 0; i < this.linksTags.length; i += 1) {
+        for (let j = 0; j < this.link.length; j += 1) {
+        if (Includes(this.linksTags[i].toLowerCase().trim(), this.link[j].toLowerCase().trim()) === true) {
+          this.linksTags.splice([i], 1);
+          if(this.linksTags.length < 1) {
+          DisplayData(recipes);
+          }
+          else {
+          Search(this.linksTags[i])
+          }
+        }
+      }
+    }
+    return this.linksTags;
+    
+  }
+
+
 
   LinkTags() {
-  const newlist = [];
-   console.log(this.link)
+    newlist = [];
+    
     for (let i = 0; i < this.resultfilters.length; i += 1) {
       const INGREDIENTS = GetRessource(this.resultfilters[i]);
-   
+
       let flag = 0;
 
       for (let j = 0; j < this.linksTags.length; j += 1) {
@@ -228,30 +247,25 @@ class Recipe {
             break;
           }
         }
-      }
 
-      if (flag === this.linksTags.length) {
-        newlist.push(this.resultfilters[i]);
-      }
-    }
-
-    
-    for(let i = 0; i < this.linksTags.length; i += 1){
-      if(Includes(this.linksTags[i].toLowerCase().trim(), this.link[0].toLowerCase().trim()) === true){
-   
-        newlist.splice([i], 1);
+        if (flag === this.linksTags.length) {
+          newlist.push(this.resultfilters[i]);
+        }
       }
     }
-    
-  
-  
 
+    /*
+    if(Includes(newlis, this.link[0].toLowerCase().trim()) === true){
+      console.log(newlist)
+      newlist.splice([j], 1);
+    }
+
+    */
 
     RECIPESZONE.innerHTML = '';
     DisplayData(newlist);
-    
-  
   }
+
 }
 
 /* function send data recipes */
@@ -279,7 +293,7 @@ function DisplayData(DataRecipe) {
 /* function filter */
 function Search(INPUT) {
   const ARRAYFILTER = [];
-
+  console.log(INPUT)
   if (INPUT.length >= 2) {
     // algo search recette full boucle Native
     for (let i = 0; i < recipes.length; i += 1) {
@@ -343,23 +357,43 @@ function Addlinktag(LINK) {
     DivTag.appendChild(ADDTAGS);
     arrayTag.push(LINK);
   }
-  console.log(arrayTag)
 
-    
-const supTag = document.querySelectorAll('.divtags');
-for (let i = 0; i < supTag.length; i += 1) {
-supTag[i].addEventListener('click', () => {
-link.push(supTag[i].firstChild.innerHTML);
+  const supTag = document.querySelectorAll('.divtags');
+  for (let i = 0; i < supTag.length; i += 1) {
+    supTag[i].addEventListener('click', () => {
+      
+      link.push(supTag[i].firstChild.innerHTML.toLowerCase().trim());
+      const testarray = new Recipe(link);
+      testarray.DeleteLink();
+    });
+
+  /*
+  for (let i = 0; i < supTag.length; i += 1) {
+    if(LINK === supTag[i].firstChild.innerHTML && arrayTag.length > 1) {
+      arrayTag.splice([i], 1);
+  }
+}
+ */
+  }
 
 
-});
+
+  const arrayTags = new Recipe(arrayTag);
+  arrayTags.LinkTags();
+}
+/*
+function Delete(Del) {
+  link = [];
+    if(Includes(link, Del) === false){
+    link.push(Del.toLowerCase());
+
+  };
+  console.log(link)
+
+  const Deletes = new Recipe();
+  Deletes.LinkTags();
 
 }
-
-const arrayTags = new Recipe(arrayTag);
-arrayTags.LinkTags();
-
-  
-}
+*/
 
 DisplayData(recipes);
