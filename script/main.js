@@ -219,7 +219,10 @@ class Recipe {
           DisplayData(recipes);
           }
           else {
-          Search(this.linksTags[i])
+          for(let k = 0; k < this.linksTags.length; k += 1) {
+          console.log(this.linksTags[k].toLowerCase().trim())
+          Search(this.linksTags[k].toLowerCase().trim())
+          }
           }
         }
       }
@@ -361,7 +364,7 @@ function Addlinktag(LINK) {
   const supTag = document.querySelectorAll('.divtags');
   for (let i = 0; i < supTag.length; i += 1) {
     supTag[i].addEventListener('click', () => {
-      
+      supTag[i].remove();
       link.push(supTag[i].firstChild.innerHTML.toLowerCase().trim());
       const testarray = new Recipe(link);
       testarray.DeleteLink();
