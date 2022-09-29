@@ -28,7 +28,6 @@ let arrays = [];
 let arrayUstensils = [];
 const arrayTag = [];
 let RESULTFILTER = [];
-const ARRAYFILTERTAG = [];
 let link = [];
 let newlist = [];
 
@@ -40,6 +39,10 @@ SEARCHINPUT.addEventListener('input', () => {
 
   Search(INPUT);
 });
+
+DROPBTNPRIMARY.addEventListener('dblclick', CloseTagIngredient);
+DROPBTNAPPAREILS.addEventListener('dblclick', CloseTagAppareil);
+DROPBTNUSTENCILS.addEventListener('dblclick', CloseTagUstensils);
 
 DROPBTNPRIMARY.addEventListener('click', OpenTagIngredient);
 DROPBTNAPPAREILS.addEventListener('click', OpenTagAppareils);
