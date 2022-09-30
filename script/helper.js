@@ -1,5 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-plusplus */
-export const Includes = (str, t) => {
+
+/* function Includes boucle native */
+const Includes = (str, t) => {
   let flag = false;
   for (let i = 0; i < str.length; i++) {
   	if (str[i] === t[0]) {
@@ -12,8 +15,9 @@ export const Includes = (str, t) => {
   }
   return flag;
 };
+/* function for list array all element filter */
 
-export const GetRessource = (recipe) => {
+const getRessource = (recipe) => {
   const Rsc = [];
 
   const RecipeAp = recipe.appliance;
@@ -26,7 +30,7 @@ export const GetRessource = (recipe) => {
   for (let j = 0; j < RecipUs.length; j++) {
     Rsc.push(RecipUs[j]);
   }
-  // eslint-disable-next-line no-plusplus
+
   for (let k = 0; k < RecipIngr.length; k++) {
     Rsc.push(RecipIngr[k].ingredient);
   }

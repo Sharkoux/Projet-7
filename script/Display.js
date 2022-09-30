@@ -36,7 +36,7 @@ function createRecipesCardDOM(data) {
   return article;
 }
 
-function TagIngredient(data) {
+function tagIngredient(data) {
   const TagIngredients = document.createElement('a');
   TagIngredients.setAttribute('class', 'linkTag');
   if (Array.isArray(data) === false) {
@@ -50,7 +50,7 @@ function TagIngredient(data) {
   return TagIngredients;
 }
 
-function Addtag(data) {
+function addTag(data) {
   const Addtags = document.createElement('div');
   Addtags.setAttribute('class', 'divtags');
   Addtags.innerHTML = `<p>${data}</p><i class="fa-regular fa-circle-xmark supTag"></i>`;

@@ -1,4 +1,4 @@
-export const recipes = [
+const recipes = [
   {
     id: 1,
     name: 'Limonade de Coco',
@@ -1726,4 +1726,4 @@ export const recipes = [
   },
 ];
 
-export const RecipesJSON = JSON.stringify(recipes);
+ const RecipesJSON = JSON.stringify(recipes);
