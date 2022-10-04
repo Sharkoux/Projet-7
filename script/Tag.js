@@ -88,11 +88,12 @@ function tagSearchUs(INPUTTAG) {
 }
 /* function for add Tag */
 function addLinkTag(LINK) {
-
+  
   /* if not tag */
   if (!DivTag.innerHTML) {
     const ADDTAGS = addTag(LINK);
     DivTag.appendChild(ADDTAGS);
+    arrayTag.push(LINK);
     /* loop for color tag */
     for (let i = 0; i < recipes.length; i++) {
       if (Includes(recipes[i].appliance.toLowerCase().trim(), LINK.toLowerCase().trim()) === true) {
@@ -104,7 +105,7 @@ function addLinkTag(LINK) {
         }
       }
     }
-    arrayTag.push(LINK);
+    
     /* if tag but not click tag */
   } else if (Includes(DivTag.innerHTML, LINK) === false) {
     const ADDTAGS = addTag(LINK);
@@ -122,6 +123,8 @@ function addLinkTag(LINK) {
       }
     }
   }
+
+  console.log(arrayTag)
   /* loop for delete tag */
   const supTag = document.querySelectorAll('.divtags'); // HTMLCOllection
   const arr = Array.from(supTag).map((tagEl) => tagEl.innerText);
@@ -131,6 +134,7 @@ function addLinkTag(LINK) {
   globalClass.linkTags(arrayTag);
   for (let i = 0; i < supTag.length; i += 1) {
     supTag[i].addEventListener('click', () => {
+      arrayTag = [];
       globalClass.deleteLink(supTag[i].innerText);
       supTag[i].remove();
     });

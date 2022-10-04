@@ -14,10 +14,10 @@ const DivTag = document.querySelector('.divtag');
 let array = [];
 let arrays = [];
 let arrayUstensils = [];
-const arrayTag = [];
+let arrayTag = [];
 let RESULTFILTER = [];
 const link = [];
-let newlist = [];
+
 
 /* class for format data card */
 class Recipe {
@@ -128,7 +128,7 @@ class Recipe {
 
   /* Method for display new Tag filter  */
   linkTags() {
-    newlist = [];
+    const newlist = [];
     console.log(this.resultfilters);
     for (let i = 0; i < this.resultfilters.length; i += 1) {
       const INGREDIENTS = getRessource(this.resultfilters[i]);
@@ -169,7 +169,11 @@ function displayData(DataRecipe) {
     NEWRECIPES.tagIngredientAvailable();
     const recipesDOM = createRecipesCardDOM(NEWRECIPES);
     RECIPESZONE.appendChild(recipesDOM);
-    RESULTFILTER = recipes;
+    if(RESULTFILTER.length === 0) {
+      console.log(RESULTFILTER)
+      RESULTFILTER = DataRecipe;
+    }
+    //RESULTFILTER = DataRecipe;
   }
 
   const LINKTAG = document.querySelectorAll('.linkTag');
@@ -205,7 +209,7 @@ function addSearch(INPUT) {
     }
 
     RESULTFILTER = [...new Set(ARRAYFILTER)];
-
+  
     RECIPESZONE.innerHTML = '';
 
     displayData(RESULTFILTER);
