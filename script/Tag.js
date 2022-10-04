@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
@@ -6,6 +7,45 @@
 let arraysearchtag = [];
 let arraysearchtagAp = [];
 let arraysearchtagUs = [];
+
+/* class for tag */
+class TagFilters {
+  constructor() {
+    this.tagfilter = arraysearchtag;
+    this.tagfilterAp = arraysearchtagAp;
+    this.tagfilterUs = arraysearchtagUs;
+  }
+
+  /* Method for display filter Tags Ingredient */
+  tagFilter() {
+    DROPDOWNMENU[0].innerHTML = '';
+    const Filter = [...new Set(this.tagfilter)];
+    for (let i = 0; i < Filter.length; i += 1) {
+      const FILTERTAG = tagIngredient(Filter[i]);
+      DROPDOWNMENU[0].appendChild(FILTERTAG);
+    }
+  }
+
+  /* Method for display filter Tags Appareils */
+  tagFilterAp() {
+    DROPDOWNMENU[1].innerHTML = '';
+    const Filter = [...new Set(this.tagfilterAp)];
+    for (let i = 0; i < Filter.length; i += 1) {
+      const FILTERTAG = tagIngredient(Filter[i]);
+      DROPDOWNMENU[1].appendChild(FILTERTAG);
+    }
+  }
+
+  /* Method for display filter Tags Ustensils */
+  tagFilterUs() {
+    DROPDOWNMENU[2].innerHTML = '';
+    const Filter = [...new Set(this.tagfilterUs)];
+    for (let i = 0; i < Filter.length; i += 1) {
+      const FILTERTAG = tagIngredient(Filter[i]);
+      DROPDOWNMENU[2].appendChild(FILTERTAG);
+    }
+  }
+}
 
 /* function TAG search Ingredient */
 function tagSearch(INPUTTAG) {
@@ -20,11 +60,9 @@ function tagSearch(INPUTTAG) {
       }
     }
   }
+  const NEWRECIPES = new TagFilters();
+  NEWRECIPES.tagFilter();
 
-  for (let k = 0; k < arraysearchtag.length; k += 1) {
-    const NEWRECIPES = new Recipe(arraysearchtag[k]);
-    NEWRECIPES.tagFilter();
-  }
   const LINKTAG = document.querySelectorAll('.linkTag');
   for (let p = 0; p < LINKTAG.length; p += 1) {
     LINKTAG[p].addEventListener('click', () => {
@@ -46,10 +84,8 @@ function tagSearchAp(INPUTTAG) {
     }
   }
 
-  for (let k = 0; k < arraysearchtagAp.length; k += 1) {
-    const NEWRECIPES = new Recipe(arraysearchtagAp[k]);
-    NEWRECIPES.tagFilterAp();
-  }
+  const NEWRECIPES = new TagFilters();
+  NEWRECIPES.tagFilterAp();
 
   const LINKTAG = document.querySelectorAll('.linkTag');
   for (let p = 0; p < LINKTAG.length; p += 1) {
@@ -74,7 +110,7 @@ function tagSearchUs(INPUTTAG) {
   }
 
   for (let k = 0; k < arraysearchtagUs.length; k += 1) {
-    const NEWRECIPES = new Recipe(arraysearchtagUs[k]);
+    const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilterUs();
   }
 
@@ -88,7 +124,6 @@ function tagSearchUs(INPUTTAG) {
 }
 /* function for add Tag */
 function addLinkTag(LINK) {
-  
   /* if not tag */
   if (!DivTag.innerHTML) {
     const ADDTAGS = addTag(LINK);
@@ -105,7 +140,7 @@ function addLinkTag(LINK) {
         }
       }
     }
-    
+
     /* if tag but not click tag */
   } else if (Includes(DivTag.innerHTML, LINK) === false) {
     const ADDTAGS = addTag(LINK);
@@ -124,7 +159,6 @@ function addLinkTag(LINK) {
     }
   }
 
-  console.log(arrayTag)
   /* loop for delete tag */
   const supTag = document.querySelectorAll('.divtags'); // HTMLCOllection
   const arr = Array.from(supTag).map((tagEl) => tagEl.innerText);

@@ -14,10 +14,10 @@ const DivTag = document.querySelector('.divtag');
 let array = [];
 let arrays = [];
 let arrayUstensils = [];
+// eslint-disable-next-line prefer-const
 let arrayTag = [];
 let RESULTFILTER = [];
 const link = [];
-
 
 /* class for format data card */
 class Recipe {
@@ -32,9 +32,6 @@ class Recipe {
     this.availableIngredientsTags = array;
     this.availableApplianceTags = arrays;
     this.availableUstensilsTag = arrayUstensils;
-    this.tagfilter = arraysearchtag;
-    this.tagfilterAp = arraysearchtagAp;
-    this.tagfilterUs = arraysearchtagUs;
     this.linksTags = arrayTag;
     this.resultfilters = RESULTFILTER;
   }
@@ -73,36 +70,6 @@ class Recipe {
     for (let k = 0; k < TagUs.length; k += 1) {
       const FINISH = tagIngredient(TagUs[k]);
       DROPDOWNMENU[2].appendChild(FINISH);
-    }
-  }
-
-  /* method for filter Tags Ingredient */
-  tagFilter() {
-    DROPDOWNMENU[0].innerHTML = '';
-    const Filter = [...new Set(this.tagfilter)];
-    for (let i = 0; i < Filter.length; i += 1) {
-      const FILTERTAG = tagIngredient(Filter[i]);
-      DROPDOWNMENU[0].appendChild(FILTERTAG);
-    }
-  }
-
-  /* method for filter Tags Appareils */
-  tagFilterAp() {
-    DROPDOWNMENU[1].innerHTML = '';
-    const Filter = [...new Set(this.tagfilterAp)];
-    for (let i = 0; i < Filter.length; i += 1) {
-      const FILTERTAG = tagIngredient(Filter[i]);
-      DROPDOWNMENU[1].appendChild(FILTERTAG);
-    }
-  }
-
-  /* method for filter Tags Ustensils */
-  tagFilterUs() {
-    DROPDOWNMENU[2].innerHTML = '';
-    const Filter = [...new Set(this.tagfilterUs)];
-    for (let i = 0; i < Filter.length; i += 1) {
-      const FILTERTAG = tagIngredient(Filter[i]);
-      DROPDOWNMENU[2].appendChild(FILTERTAG);
     }
   }
 
@@ -156,7 +123,7 @@ class Recipe {
   }
 }
 
-/* function send data recipes */
+/* send data recipes to display function */
 
 function displayData(DataRecipe) {
   array = [];
@@ -169,11 +136,10 @@ function displayData(DataRecipe) {
     NEWRECIPES.tagIngredientAvailable();
     const recipesDOM = createRecipesCardDOM(NEWRECIPES);
     RECIPESZONE.appendChild(recipesDOM);
-    if(RESULTFILTER.length === 0) {
-      console.log(RESULTFILTER)
+    if (RESULTFILTER.length === 0) {
+      console.log(RESULTFILTER);
       RESULTFILTER = DataRecipe;
     }
-    //RESULTFILTER = DataRecipe;
   }
 
   const LINKTAG = document.querySelectorAll('.linkTag');
@@ -185,7 +151,7 @@ function displayData(DataRecipe) {
   }
 }
 
-/* function filter */
+/* function filter (searchbar) */
 function addSearch(INPUT) {
   const ARRAYFILTER = [];
 
@@ -209,7 +175,7 @@ function addSearch(INPUT) {
     }
 
     RESULTFILTER = [...new Set(ARRAYFILTER)];
-  
+
     RECIPESZONE.innerHTML = '';
 
     displayData(RESULTFILTER);

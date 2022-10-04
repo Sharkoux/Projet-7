@@ -35,8 +35,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-
-
 /* if open dropdown Ingredient */
 function openTagIngredient() {
   DROPDOWNINGREDIENT.classList.toggle('active');
