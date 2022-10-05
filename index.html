@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5a8a8c5fcf.js" crossorigin="anonymous"></script>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet"/>
 
     <title>Les petits plats</title>
 </head>
@@ -21,7 +21,7 @@
 <body>
     <!--Header-->
     <header>
-        <img src="./asset/logo.png">
+        <img src="./asset/logo.png" alt="Les petits plats">
     </header>
     <!--Navigation-->
     <nav>
@@ -32,28 +32,29 @@
                         aria-hidden="true"></i></span>
             </div>
         </form>
+        <div class="divtag"></div>
         <div class="filter">
             <div class="dropdown">
-                <button onclick="" class="drop_btn btn btn-primary ">Ingrédients<em
+                <button class="drop_btn btn btn-primary btn">Ingrédients<em
+                        class="fa-solid fa-angle-down angle-down "></em> 
+                </button>
+                <div class="dropdown-menu btn-ingrédients blue">
+                    
+                </div>
+            </div>
+            <div class="dropdown">
+                <button  class="drop_btn btn btn-appareils">Appareils<em
                         class="fa-solid fa-angle-down angle-down"></em> <em class="fa-solid fa-angle-up angle-up"></em>
                 </button>
-                <div id="Dropdown" class="dropdown-menu">
+                <div class="dropdown-menu btn_appareils green ">
 
                 </div>
             </div>
             <div class="dropdown">
-                <button onclick="" class="drop_btn btn btn-appareils">Appareils<em
-                        class="fa-solid fa-angle-down angle-down"></em> <em class="fa-solid fa-angle-up angle-up"></em>
+                <button  class="drop_btn btn btn-danger ">Ustensiles<em
+                        class="fa-solid fa-angle-down angle-down btn-danger"></em> <em class="fa-solid fa-angle-up angle-up"></em>
                 </button>
-                <div id="Dropdown" class="dropdown-menu">
-
-                </div>
-            </div>
-            <div class="dropdown">
-                <button onclick="" class="drop_btn btn btn-danger ">Ustensiles<em
-                        class="fa-solid fa-angle-down angle-down"></em> <em class="fa-solid fa-angle-up angle-up"></em>
-                </button>
-                <div id="Dropdown" class="dropdown-menu">
+                <div class="dropdown-menu btn_danger red">
 
                 </div>
             </div>
@@ -72,10 +73,12 @@
     </main>
 
     <!--Import script JS-->
-    <script src="./data/recipes.js" type="module"></script>
-    <script src="./script/main.js" type="module"></script>
-    <script src="./script/factory.js"></script>
-    
+    <script src="./script/helper.js"></script>
+    <script src="./data/recipes.js"></script>
+    <script src="./script/event.js"></script>
+    <script src="./script/Tag.js"></script>
+    <script src="./script/Display.js"></script>
+    <script src="./script/main.js"></script>
 </body>
 
 </html>

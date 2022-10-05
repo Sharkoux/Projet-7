@@ -9,6 +9,7 @@ body {
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 header {
@@ -22,6 +23,21 @@ header img {
     margin-top: 45px;
     margin-bottom: 20px;
 }
+
+
+
+.blue { 
+    background:#007bff!important;
+}
+
+.green {
+    background: #68d9a4!important;
+}
+
+.red {
+    background: #dc3545!important;
+}
+
 
 /* Navigation */
 
@@ -47,20 +63,22 @@ header img {
 .dropdown {
     margin-top: 20px;
     margin-right: 20px;
-
+    max-width: 650px;
 }
 
 .drop_btn {
-    width: 150px;
+    min-width: 150px;
     padding: 15px;
     font-weight: 400;
     text-align: left;
+    border-radius: 5px;
+    border: 0px transparent;
 }
 
 .angle-up {
-    display: none;
+   
     position: absolute;
-    left: 120px;
+    left: 610px;
     top: 20px
 }
 
@@ -75,6 +93,56 @@ header img {
     color: white
 }
 
+.dropdown-menu {
+    width: 650px;
+    max-height: 400px ;
+    flex-direction: column;
+    flex-wrap: wrap;
+    color: white;
+    padding: 10px;
+    overflow: scroll;
+    border-radius: 0 0 5px 5px;
+    border: transparent;
+}
+
+
+
+.dropdown-menu a {
+    padding-left: 15px;
+    padding-bottom: 2px
+}
+.active {
+    display: flex!important;
+    margin-top: -1px;
+    
+}
+
+.btn-active {
+    width: 650px;
+    
+}
+
+.search-ingredients,
+.search-appareils,
+.search-ustensils {
+    width: 580px;
+    color: white!important;
+    border: transparent;
+    padding: 0px!important;
+    margin-right: 40px;
+}
+
+
+
+
+.search-ingredients::placeholder,
+.search-appareils::placeholder,
+.search-ustensils::placeholder {
+    color: white!important;
+    opacity: 0.5;
+}
+
+
 /* Card Recipes */ 
 
 .recipes_card {
@@ -83,6 +151,7 @@ header img {
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
 
 
 article {
@@ -170,4 +239,31 @@ article {
     -webkit-box-orient: vertical;
     overflow: hidden;
     
+}
+
+/* Tag */
+
+.divtag {
+    display: flex;
+}
+
+.divtags {
+    display: flex;
+    background: #3282F7;
+    color: white;
+    margin: 10px;
+    padding: 10px;
+    width: 130px;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+.divtags p {
+    margin: 0px;
+    margin-right: 5px;
+}
+
+.supTag {
+    font-size: large;
 }

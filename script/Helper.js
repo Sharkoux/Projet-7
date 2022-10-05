@@ -1,0 +1,25 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-plusplus */
+
+/* function for list array all element filter */
+
+const getRessource = (recipe) => {
+  const Rsc = [];
+
+  const RecipeAp = recipe.appliance;
+  const RecipUs = recipe.ustensils;
+  const RecipIngr = recipe.ingredients;
+
+  for (let i = 0; i < RecipeAp.length; i++) {
+    Rsc.push(RecipeAp);
+  }
+  for (let j = 0; j < RecipUs.length; j++) {
+    Rsc.push(RecipUs[j]);
+  }
+
+  for (let k = 0; k < RecipIngr.length; k++) {
+    Rsc.push(RecipIngr[k].ingredient);
+  }
+
+  return Rsc;
+};
