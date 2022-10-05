@@ -20,6 +20,7 @@ class TagFilters {
   tagFilter() {
     DROPDOWNMENU[0].innerHTML = '';
     const Filter = [...new Set(this.tagfilter)];
+    console.log(Filter)
     for (let i = 0; i < Filter.length; i += 1) {
       const FILTERTAG = tagIngredient(Filter[i]);
       DROPDOWNMENU[0].appendChild(FILTERTAG);
@@ -30,6 +31,7 @@ class TagFilters {
   tagFilterAp() {
     DROPDOWNMENU[1].innerHTML = '';
     const Filter = [...new Set(this.tagfilterAp)];
+    console.log(Filter)
     for (let i = 0; i < Filter.length; i += 1) {
       const FILTERTAG = tagIngredient(Filter[i]);
       DROPDOWNMENU[1].appendChild(FILTERTAG);
@@ -60,16 +62,11 @@ function tagSearch(INPUTTAG) {
       }
     }
   }
+  for (let k = 0; k < arraysearchtag.length; k += 1) {
   const NEWRECIPES = new TagFilters();
   NEWRECIPES.tagFilter();
-
-  const LINKTAG = document.querySelectorAll('.linkTag');
-  for (let p = 0; p < LINKTAG.length; p += 1) {
-    LINKTAG[p].addEventListener('click', () => {
-      const LINK = LINKTAG[p].innerHTML;
-      addLinkTag(LINK);
-    });
   }
+  LINKTAG();
 }
 
 /* function TAG search Appareils */
@@ -83,17 +80,11 @@ function tagSearchAp(INPUTTAG) {
       arraysearchtagAp.push(TAGS.appliance.toLowerCase());
     }
   }
-
+  for (let k = 0; k < arraysearchtagAp.length; k += 1) {
   const NEWRECIPES = new TagFilters();
   NEWRECIPES.tagFilterAp();
-
-  const LINKTAG = document.querySelectorAll('.linkTag');
-  for (let p = 0; p < LINKTAG.length; p += 1) {
-    LINKTAG[p].addEventListener('click', () => {
-      const LINK = LINKTAG[p].innerHTML;
-      addLinkTag(LINK);
-    });
   }
+  LINKTAG();
 }
 
 /* function TAG search Appareils */
@@ -113,14 +104,7 @@ function tagSearchUs(INPUTTAG) {
     const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilterUs();
   }
-
-  const LINKTAG = document.querySelectorAll('.linkTag');
-  for (let p = 0; p < LINKTAG.length; p += 1) {
-    LINKTAG[p].addEventListener('click', () => {
-      const LINK = LINKTAG[p].innerHTML;
-      addLinkTag(LINK);
-    });
-  }
+    LINKTAG(); 
 }
 /* function for add Tag */
 function addLinkTag(LINK) {
@@ -141,7 +125,7 @@ function addLinkTag(LINK) {
       }
     }
 
-    /* if tag but not click tag */
+    /* if tag but not his click tag */
   } else if (Includes(DivTag.innerHTML, LINK) === false) {
     const ADDTAGS = addTag(LINK);
     DivTag.appendChild(ADDTAGS);

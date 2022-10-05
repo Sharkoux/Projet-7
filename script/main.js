@@ -8,13 +8,13 @@
 
 const RECIPESZONE = document.querySelector('.recipes_card');
 const DROPDOWNMENU = document.querySelectorAll('.dropdown-menu');
+let INPUT;
 
 const DivTag = document.querySelector('.divtag');
 
 let array = [];
 let arrays = [];
 let arrayUstensils = [];
-// eslint-disable-next-line prefer-const
 let arrayTag = [];
 let RESULTFILTER = [];
 const link = [];
@@ -75,6 +75,7 @@ class Recipe {
 
   /* Method delete tag filter */
   deleteLink(tag) {
+    
     const newList = [];
     for (let i = 0; i < this.linksTags.length; i++) {
       if (this.linksTags[i] !== tag) {
@@ -82,12 +83,18 @@ class Recipe {
       }
     }
     this.linksTags = newList;
-    console.log(this.linksTags);
+  
     if (this.linksTags.length > 0) {
       this.linkTags();
     } else {
+      if(!INPUT) {
+      RECIPESZONE.innerHTML = '';
+      displayData(recipes);
+      }
+      else{
       RECIPESZONE.innerHTML = '';
       displayData(this.resultfilters);
+      }
     }
 
     return this.linksTags;
@@ -96,7 +103,7 @@ class Recipe {
   /* Method for display new Tag filter  */
   linkTags() {
     const newlist = [];
-    console.log(this.resultfilters);
+   
     for (let i = 0; i < this.resultfilters.length; i += 1) {
       const INGREDIENTS = getRessource(this.resultfilters[i]);
 
@@ -141,14 +148,7 @@ function displayData(DataRecipe) {
       RESULTFILTER = DataRecipe;
     }
   }
-
-  const LINKTAG = document.querySelectorAll('.linkTag');
-  for (let j = 0; j < LINKTAG.length; j += 1) {
-    LINKTAG[j].addEventListener('click', () => {
-      const LINK = LINKTAG[j].innerHTML;
-      addLinkTag(LINK);
-    });
-  }
+  LINKTAG();
 }
 
 /* function filter (searchbar) */
@@ -175,11 +175,18 @@ function addSearch(INPUT) {
     }
 
     RESULTFILTER = [...new Set(ARRAYFILTER)];
-
+    
+    if(RESULTFILTER.length > 0) {
     RECIPESZONE.innerHTML = '';
-
     displayData(RESULTFILTER);
+    }
+    else{
+    RECIPESZONE.innerHTML = '';
+    displayData(recipes);
+    }
   }
+  
+ 
 }
 
 displayData(recipes);

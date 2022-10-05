@@ -37,3 +37,15 @@ const getRessource = (recipe) => {
 
   return Rsc;
 };
+
+
+function LINKTAG() {
+  
+  const LINKTAG = document.querySelectorAll('.linkTag');
+  for (let j = 0; j < LINKTAG.length; j += 1) {
+    LINKTAG[j].addEventListener('click', () => {
+      const LINK = LINKTAG[j].innerHTML;
+      addLinkTag(LINK);
+    });
+  }
+}
