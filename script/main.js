@@ -75,7 +75,6 @@ class Recipe {
 
   /* Method delete tag filter */
   deleteLink(tag) {
-    
     const newList = [];
     for (let i = 0; i < this.linksTags.length; i++) {
       if (this.linksTags[i] !== tag) {
@@ -83,27 +82,31 @@ class Recipe {
       }
     }
     this.linksTags = newList;
-  
+   
     if (this.linksTags.length > 0) {
-      this.linkTags();
+      if (!INPUT) {
+        this.resultfilters = recipes;
+        this.linkTags();
+      } else {
+        this.linkTags();
+      }
     } else {
       if(!INPUT) {
       RECIPESZONE.innerHTML = '';
       displayData(recipes);
       }
-      else{
+      else {
       RECIPESZONE.innerHTML = '';
       displayData(this.resultfilters);
       }
     }
 
-    return this.linksTags;
   }
 
   /* Method for display new Tag filter  */
   linkTags() {
     const newlist = [];
-   
+    
     for (let i = 0; i < this.resultfilters.length; i += 1) {
       const INGREDIENTS = getRessource(this.resultfilters[i]);
 
@@ -148,14 +151,16 @@ function displayData(DataRecipe) {
       RESULTFILTER = DataRecipe;
     }
   }
+  
   LINKTAG();
 }
 
 /* function filter (searchbar) */
 function addSearch(INPUT) {
   const ARRAYFILTER = [];
-
+  
   if (INPUT.length >= 2) {
+   
     // algo search recette full boucle Native
     for (let i = 0; i < recipes.length; i += 1) {
       if (Includes(recipes[i].name.toLowerCase().trim(), INPUT.toLowerCase().trim()) === true) {
@@ -176,17 +181,43 @@ function addSearch(INPUT) {
 
     RESULTFILTER = [...new Set(ARRAYFILTER)];
     
-    if(RESULTFILTER.length > 0) {
+    if (RESULTFILTER.length > 0) {
     RECIPESZONE.innerHTML = '';
     displayData(RESULTFILTER);
+  } 
+  }
+
+  if(INPUT.length === 0 && arrayTag.length > 0) {
+    const newlist = [];
+    
+    for (let i = 0; i < recipes.length; i += 1) {
+      const INGREDIENTS = getRessource(recipes[i]);
+
+      let flag = 0;
+
+      for (let j = 0; j < arrayTag.length; j += 1) {
+        const currentTag = arrayTag[j];
+
+        for (let k = 0; k < INGREDIENTS.length; k += 1) {
+          if (Includes(INGREDIENTS[k].toLowerCase().trim(), currentTag.toLowerCase().trim()) === true) {
+            flag += 1;
+            break;
+          }
+        }
+
+        if (flag === arrayTag.length) {
+          newlist.push(recipes[i]);
+        }
+      }
     }
-    else{
+
+    if(newlist.length > 0){
     RECIPESZONE.innerHTML = '';
-    displayData(recipes);
+    displayData(newlist);
     }
   }
   
- 
+  
 }
 
 displayData(recipes);
