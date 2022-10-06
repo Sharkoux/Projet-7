@@ -159,27 +159,20 @@ function displayData(DataRecipe) {
 function addSearch(INPUT) {
   const ARRAYFILTER = [];
   
-  if (INPUT.length >= 2) {
-   
+  if (INPUT.length >= 2 && arrayTag.length === 0) {
     // algo search recette full boucle Native
+    const newlist = [];
     for (let i = 0; i < recipes.length; i += 1) {
-      if (Includes(recipes[i].name.toLowerCase().trim(), INPUT.toLowerCase().trim()) === true) {
-        ARRAYFILTER.push(recipes[i]);
-      }
-      if (Includes(recipes[i].description.toLowerCase().trim(), INPUT.toLowerCase().trim()) === true) {
-        ARRAYFILTER.push(recipes[i]);
-      }
+      const INGREDIENTS = getRessource(recipes[i]);
 
-      for (let j = 0; j < recipes[i].ingredients.length; j += 1) {
-        const INGREDIENTS = recipes[i].ingredients;
-
-        if (Includes(INGREDIENTS[j].ingredient.toLowerCase().trim(), INPUT.toLowerCase().trim()) === true) {
-          ARRAYFILTER.push(recipes[i]);
+        for (let k = 0; k < INGREDIENTS.length; k += 1) {
+          if (Includes(INGREDIENTS[k].toLowerCase().trim(), INPUT.toLowerCase().trim()) === true) {
+            newlist.push(recipes[i]);
+            break;
+          }
         }
       }
-    }
-
-    RESULTFILTER = [...new Set(ARRAYFILTER)];
+    RESULTFILTER = [...new Set(newlist)];
     
     if (RESULTFILTER.length > 0) {
     RECIPESZONE.innerHTML = '';
@@ -210,7 +203,7 @@ function addSearch(INPUT) {
         }
       }
     }
-
+    
     if(newlist.length > 0){
     RECIPESZONE.innerHTML = '';
     displayData(newlist);
