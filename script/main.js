@@ -84,7 +84,7 @@ class Recipe {
       }
     }
     this.linksTags = newList;
-    console.log(this.linksTags)
+    arraytags = newList;
     if (this.linksTags.length > 0) {
       if (!INPUT) {
         this.resultfilters = recipes;
@@ -162,10 +162,11 @@ function displayData(DataRecipe) {
 
 /* function filter (searchbar) */
 function addSearch(INPUT) {
-  console.log(arrayTag)
+  console.log(arraytags)
   
-  if (INPUT.length >= 2 && arrayTag.length === 0) {
+  if (INPUT.length >= 2 && arraytags.length === 0) {
     // algo search recette full boucle Native
+    //arraytags = [];
     const newlist = [];
     for (let i = 0; i < recipes.length; i += 1) {
       const INGREDIENTS = getRessource(recipes[i]);
