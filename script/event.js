@@ -47,7 +47,7 @@ function openTagIngredient() {
     const INPUTTAG = SEARCHTAG.value.trim();
     tagSearch(INPUTTAG);
   });
-  LINKTAG();
+  linkTag();
 }
 /* if close dropdown Ingrédient */
 function closeTagIngredient() {
@@ -70,7 +70,7 @@ function openTagAppareils() {
     const INPUTTAG = SEARCHTAG.value.trim();
     tagSearchAp(INPUTTAG);
   });
-  LINKTAG();
+  linkTag();
 }
 
 /* if close dropdown Appareil */
@@ -95,7 +95,7 @@ function openTagUstensiles() {
     const INPUTTAG = SEARCHTAG.value.trim();
     tagSearchUs(INPUTTAG);
   });
-  LINKTAG();
+  linkTag();
 }
 
 /* if close dropdown Ustensils */

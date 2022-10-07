@@ -2,7 +2,7 @@
 /* eslint-disable no-plusplus */
 
 /* function Includes boucle native */
-const Includes = (str, t) => {
+const includes = (str, t) => {
   let flag = false;
   for (let i = 0; i < str.length; i++) {
     if (str[i] === t[0]) {
@@ -38,14 +38,14 @@ const getRessource = (recipe) => {
   return Rsc;
 };
 
+const getTrim = (str) => str.toLowerCase().trim();
 
-function LINKTAG() {
-  
-  const LINKTAG = document.querySelectorAll('.linkTag');
-  for (let j = 0; j < LINKTAG.length; j += 1) {
-    LINKTAG[j].addEventListener('click', () => {
-      const LINK = LINKTAG[j].innerHTML;
-      addLinkTag(LINK);
+function linkTag() {
+  const linkTags = document.querySelectorAll('.linkTag');
+  for (let j = 0; j < linkTags.length; j += 1) {
+    linkTags[j].addEventListener('click', () => {
+      const link = linkTags[j].innerHTML;
+      addLinkTag(link);
     });
   }
 }
