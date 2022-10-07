@@ -17,6 +17,7 @@ let arrays = [];
 let arrayUstensils = [];
 let arrayTag = [];
 let RESULTFILTER = [];
+let arraytags = [];
 const link = [];
 
 /* class for format data card */
@@ -75,6 +76,7 @@ class Recipe {
 
   /* Method delete tag filter */
   deleteLink(tag) {
+    
     const newList = [];
     for (let i = 0; i < this.linksTags.length; i++) {
       if (this.linksTags[i] !== tag) {
@@ -82,16 +84,18 @@ class Recipe {
       }
     }
     this.linksTags = newList;
-   
+    console.log(this.linksTags)
     if (this.linksTags.length > 0) {
       if (!INPUT) {
         this.resultfilters = recipes;
+        console.log("ici")
         this.linkTags();
       } else {
         this.linkTags();
       }
     } else {
       if(!INPUT) {
+        
       RECIPESZONE.innerHTML = '';
       displayData(recipes);
       }
@@ -139,6 +143,7 @@ function displayData(DataRecipe) {
   array = [];
   arrays = [];
   arrayUstensils = [];
+  
 
   DROPDOWNMENU[0].innerHTML = '';
   for (let i = 0; i < DataRecipe.length; i += 1) {
@@ -157,7 +162,7 @@ function displayData(DataRecipe) {
 
 /* function filter (searchbar) */
 function addSearch(INPUT) {
-  const ARRAYFILTER = [];
+  console.log(arrayTag)
   
   if (INPUT.length >= 2 && arrayTag.length === 0) {
     // algo search recette full boucle Native
@@ -180,17 +185,17 @@ function addSearch(INPUT) {
   } 
   }
 
-  if(INPUT.length === 0 && arrayTag.length > 0) {
+  if(INPUT.length === 0 && arraytags.length > 0) {
     const newlist = [];
-    
+   
     for (let i = 0; i < recipes.length; i += 1) {
       const INGREDIENTS = getRessource(recipes[i]);
 
       let flag = 0;
 
-      for (let j = 0; j < arrayTag.length; j += 1) {
-        const currentTag = arrayTag[j];
-
+      for (let j = 0; j < arraytags.length; j += 1) {
+        const currentTag = arraytags[j];
+        console.log(currentTag)
         for (let k = 0; k < INGREDIENTS.length; k += 1) {
           if (Includes(INGREDIENTS[k].toLowerCase().trim(), currentTag.toLowerCase().trim()) === true) {
             flag += 1;
@@ -198,7 +203,7 @@ function addSearch(INPUT) {
           }
         }
 
-        if (flag === arrayTag.length) {
+        if (flag === arraytags.length) {
           newlist.push(recipes[i]);
         }
       }
@@ -207,10 +212,12 @@ function addSearch(INPUT) {
     if(newlist.length > 0){
     RECIPESZONE.innerHTML = '';
     displayData(newlist);
+    
     }
+   
   }
   
-  
+ 
 }
 
 displayData(recipes);

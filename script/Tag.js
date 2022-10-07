@@ -20,7 +20,6 @@ class TagFilters {
   tagFilter() {
     DROPDOWNMENU[0].innerHTML = '';
     const Filter = [...new Set(this.tagfilter)];
-    console.log(Filter)
     for (let i = 0; i < Filter.length; i += 1) {
       const FILTERTAG = tagIngredient(Filter[i]);
       DROPDOWNMENU[0].appendChild(FILTERTAG);
@@ -31,7 +30,6 @@ class TagFilters {
   tagFilterAp() {
     DROPDOWNMENU[1].innerHTML = '';
     const Filter = [...new Set(this.tagfilterAp)];
-    console.log(Filter)
     for (let i = 0; i < Filter.length; i += 1) {
       const FILTERTAG = tagIngredient(Filter[i]);
       DROPDOWNMENU[1].appendChild(FILTERTAG);
@@ -142,13 +140,13 @@ function addLinkTag(LINK) {
       }
     }
   }
-
+  
   /* loop for delete tag */
   const supTag = document.querySelectorAll('.divtags'); // HTMLCOllection
   const arr = Array.from(supTag).map((tagEl) => tagEl.innerText);
 
   const globalClass = new Recipe(arr);
-
+  arraytags = arrayTag;
   globalClass.linkTags(arrayTag);
   for (let i = 0; i < supTag.length; i += 1) {
     supTag[i].addEventListener('click', () => {
