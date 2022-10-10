@@ -108,7 +108,6 @@ class Recipe {
   /* Method for display new tag filter  */
   linkTags() {
     const newlist = [];
-    console.log(this.resultfilters)
     for (let i = 0; i < this.resultfilters.length; i += 1) {
       const ingredientRessource = getRessource(this.resultfilters[i]);
 
@@ -160,7 +159,7 @@ function displayData(DataRecipe) {
 
 /* function filter (searchbar) */
 function addSearch(INPUT) {
-  console.log(arraytags)
+ 
   if (INPUT.length >= 2 && arraytags.length === 0) {
     // algo search recette full boucle Native
 

@@ -170,7 +170,6 @@ function addLinkTag(LINK) {
   const globalClass = new Recipe(arr);
   arraytags = arrayTag;
   globalClass.linkTags(arrayTag);
-  console.log(arrayTag)
   for (let i = 0; i < supTag.length; i += 1) {
     supTag[i].addEventListener('click', () => {
       arrayTag = [];
