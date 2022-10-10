@@ -16,17 +16,18 @@ class TagFilters {
     this.tagfilterUs = arraysearchtagUs;
   }
 
-  /* Method for display filter Tags Ingredient */
+  /* Method for display filter tags Ingredient */
   tagFilter() {
     dropdownmenu[0].innerHTML = '';
     const Filter = [...new Set(this.tagfilter)];
+    
     for (let i = 0; i < Filter.length; i += 1) {
       const FILTERTAG = tagIngredient(Filter[i]);
       dropdownmenu[0].appendChild(FILTERTAG);
     }
   }
 
-  /* Method for display filter Tags Appareils */
+  /* Method for display filter tags Appareils */
   tagFilterAp() {
     dropdownmenu[1].innerHTML = '';
     const Filter = [...new Set(this.tagfilterAp)];
@@ -36,7 +37,7 @@ class TagFilters {
     }
   }
 
-  /* Method for display filter Tags Ustensils */
+  /* Method for display filter tags Ustensils */
   tagFilterUs() {
     dropdownmenu[2].innerHTML = '';
     const Filter = [...new Set(this.tagfilterUs)];
@@ -53,16 +54,21 @@ function tagSearch(INPUTTAG) {
 
   for (let i = 0; i < recipes.length; i += 1) {
     for (let j = 0; j < recipes[i].ingredients.length; j += 1) {
-      const TAGS = recipes[i].ingredients;
-
-      if (includes(TAGS[j].ingredient.toLowerCase().trim(), INPUTTAG.toLowerCase().trim()) === true) {
-        arraysearchtag.push(TAGS[j].ingredient.toLowerCase());
+      const tags = recipes[i].ingredients;
+      const tagIngredient = getTrim(tags[j].ingredient);
+      const inputTag = getTrim(INPUTTAG);
+      if (includes(tagIngredient, inputTag)) {
+        arraysearchtag.push(tagIngredient);
       }
     }
   }
+  
   for (let k = 0; k < arraysearchtag.length; k += 1) {
     const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilter();
+  }
+  if(!INPUT) {
+    resultFilter = recipes
   }
   linkTag();
 }
@@ -72,28 +78,33 @@ function tagSearchAp(INPUTTAG) {
   arraysearchtagAp = [];
 
   for (let i = 0; i < recipes.length; i += 1) {
-    const TAGS = recipes[i];
-
-    if (includes(TAGS.appliance.toLowerCase().trim(), INPUTTAG.toLowerCase().trim()) === true) {
-      arraysearchtagAp.push(TAGS.appliance.toLowerCase());
+    const tags = recipes[i];
+    const tagAppliance = getTrim(tags.appliance);
+    const inputTag = getTrim(INPUTTAG)
+    if (includes(tagAppliance, inputTag)) {
+      arraysearchtagAp.push(tags.appliance.toLowerCase());
     }
   }
   for (let k = 0; k < arraysearchtagAp.length; k += 1) {
     const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilterAp();
   }
+  if(!INPUT) {
+    resultFilter = recipes;
+  }
   linkTag();
 }
 
 /* function TAG search Appareils */
-function tagSearchUs(INPUTTAG) {
+function tagsearchUs(INPUTTAG) {
   arraysearchtagUs = [];
 
   for (let i = 0; i < recipes.length; i += 1) {
     for (let j = 0; j < recipes[i].ustensils.length; j += 1) {
-      const TAGS = recipes[i].ustensils[j];
-      if (includes(TAGS.toLowerCase().trim(), INPUTTAG.toLowerCase().trim()) === true) {
-        arraysearchtagUs.push(TAGS.toLowerCase());
+      const tags = getTrim(recipes[i].ustensils[j]);
+      const inputTag = getTrim(INPUTTAG);
+      if (includes(tags, inputTag)) {
+        arraysearchtagUs.push(tags.toLowerCase());
       }
     }
   }
@@ -102,22 +113,31 @@ function tagSearchUs(INPUTTAG) {
     const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilterUs();
   }
+  if(!INPUT) {
+    resultFilter = recipes;
+  }
   linkTag();
 }
 /* function for add Tag */
 function addLinkTag(LINK) {
+  const link = getTrim(LINK);
   /* if not tag */
   if (!DivTag.innerHTML) {
-    const ADDTAGS = addTag(LINK);
-    DivTag.appendChild(ADDTAGS);
+    const ADDtags = addTag(LINK);
+    DivTag.appendChild(ADDtags);
     arrayTag.push(LINK);
     /* loop for color tag */
+    
     for (let i = 0; i < recipes.length; i++) {
-      if (includes(recipes[i].appliance.toLowerCase().trim(), LINK.toLowerCase().trim()) === true) {
+      const recipesAppliance = getTrim(recipes[i].appliance);
+      
+      if (includes(recipesAppliance, link)) {
         DivTag.firstChild.classList.add('green');
       }
       for (let j = 0; j < recipes[i].ustensils.length; j++) {
-        if (includes(recipes[i].ustensils[j].toLowerCase().trim(), LINK.toLowerCase().trim()) === true) {
+        const recipesUstensils = getTrim(recipes[i].ustensils[j]);
+        
+        if (includes(recipesUstensils, link)) {
           DivTag.firstChild.classList.add('red');
         }
       }
@@ -125,22 +145,24 @@ function addLinkTag(LINK) {
 
     /* if tag but not his click tag */
   } else if (includes(DivTag.innerHTML, LINK) === false) {
-    const ADDTAGS = addTag(LINK);
-    DivTag.appendChild(ADDTAGS);
+    const ADDtags = addTag(LINK);
+    DivTag.appendChild(ADDtags);
     arrayTag.push(LINK);
     /* loop for color tag */
     for (let i = 0; i < recipes.length; i++) {
-      if (includes(recipes[i].appliance.toLowerCase().trim(), LINK.toLowerCase().trim()) === true) {
+      const recipesAppliances = getTrim(recipes[i].appliance)
+      if (includes(recipesAppliances, link)) {
         DivTag.lastChild.classList.add('green');
       }
       for (let j = 0; j < recipes[i].ustensils.length; j++) {
-        if (includes(recipes[i].ustensils[j].toLowerCase().trim(), LINK.toLowerCase().trim()) === true) {
+        const recipeUstensils = getTrim(recipes[i].ustensils[j])
+        if (includes(recipeUstensils, link)) {
           DivTag.lastChild.classList.add('red');
         }
       }
     }
   }
-
+ 
   /* loop for delete tag */
   const supTag = document.querySelectorAll('.divtags'); // HTMLCOllection
   const arr = Array.from(supTag).map((tagEl) => tagEl.innerText);
@@ -148,6 +170,7 @@ function addLinkTag(LINK) {
   const globalClass = new Recipe(arr);
   arraytags = arrayTag;
   globalClass.linkTags(arrayTag);
+  console.log(arrayTag)
   for (let i = 0; i < supTag.length; i += 1) {
     supTag[i].addEventListener('click', () => {
       arrayTag = [];

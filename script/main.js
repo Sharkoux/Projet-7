@@ -15,7 +15,7 @@ const DivTag = document.querySelector('.divtag');
 let array = [];
 let arrays = [];
 let arrayUstensils = [];
-const arrayTag = [];
+let arrayTag = [];
 let resultFilter = [];
 let arraytags = [];
 const link = [];
@@ -42,7 +42,8 @@ class Recipe {
     /* Display ingredients Tags */
     dropdownmenu[0].innerHTML = '';
     for (let j = 0; j < this.ingredients.length; j += 1) {
-      this.availableIngredientsTags.push(this.ingredients[j].ingredient.toLowerCase().trim());
+      const ingredient = getTrim(this.ingredients[j].ingredient)
+      this.availableIngredientsTags.push(ingredient);
     }
     const tag = [...new Set(this.availableIngredientsTags)];
 
@@ -53,7 +54,8 @@ class Recipe {
     /* Display appliance Tags */
     dropdownmenu[1].innerHTML = '';
     for (let i = 0; i < this.appliance.length; i += 1) {
-      this.availableApplianceTags.push(this.appliance.toLowerCase().trim());
+      const appliance = getTrim(this.appliance);
+      this.availableApplianceTags.push(appliance);
     }
     const tagApp = [...new Set(this.availableApplianceTags)];
 
@@ -64,7 +66,8 @@ class Recipe {
     /* Display ustensils Tags */
     dropdownmenu[2].innerHTML = '';
     for (let i = 0; i < this.ustensils.length; i += 1) {
-      this.availableUstensilsTag.push(this.ustensils[i].toLowerCase().trim());
+      const ustensils = getTrim(this.ustensils[i])
+      this.availableUstensilsTag.push(ustensils);
     }
     const tagUs = [...new Set(this.availableUstensilsTag)];
 
@@ -87,7 +90,6 @@ class Recipe {
     if (this.linksTags.length > 0) {
       if (!INPUT) {
         this.resultfilters = recipes;
-
         this.linkTags();
       } else {
         this.linkTags();
@@ -95,26 +97,30 @@ class Recipe {
     } else if (!INPUT) {
       recipeszone.innerHTML = '';
       displayData(recipes);
+      
     } else {
       recipeszone.innerHTML = '';
       displayData(this.resultfilters);
+      
     }
   }
 
   /* Method for display new tag filter  */
   linkTags() {
     const newlist = [];
-
+    console.log(this.resultfilters)
     for (let i = 0; i < this.resultfilters.length; i += 1) {
       const ingredientRessource = getRessource(this.resultfilters[i]);
 
       let flag = 0;
 
       for (let j = 0; j < this.linksTags.length; j += 1) {
-        const currentTag = this.linksTags[j];
-
+        const currentTag = getTrim(this.linksTags[j]);
+        console.log(currentTag)
         for (let k = 0; k < ingredientRessource.length; k += 1) {
-          if (includes(ingredientRessource[k].toLowerCase().trim(), currentTag.toLowerCase().trim())) {
+          const ingredientRsc = getTrim(ingredientRessource[k]);
+
+          if (includes(ingredientRsc, currentTag)) {
             flag += 1;
             break;
           }
@@ -154,6 +160,7 @@ function displayData(DataRecipe) {
 
 /* function filter (searchbar) */
 function addSearch(INPUT) {
+  console.log(arraytags)
   if (INPUT.length >= 2 && arraytags.length === 0) {
     // algo search recette full boucle Native
 
@@ -162,7 +169,9 @@ function addSearch(INPUT) {
       const ingredientRessource = getRessource(recipes[i]);
 
       for (let k = 0; k < ingredientRessource.length; k += 1) {
-        if (includes(getTrim(ingredientRessource[k]), getTrim(INPUT))) {
+        const ingredientRsc = getTrim(ingredientRessource[k]);
+        const input = getTrim(INPUT);
+        if (includes( ingredientRsc, input)) {
           newlist.push(recipes[i]);
           break;
         }
@@ -185,10 +194,11 @@ function addSearch(INPUT) {
       let flag = 0;
 
       for (let j = 0; j < arraytags.length; j += 1) {
-        const currentTag = arraytags[j];
+        const currentTag = getTrim(arraytags[j]);
 
         for (let k = 0; k < ingredientRessource.length; k += 1) {
-          if (includes(ingredientRessource[k].toLowerCase().trim(), currentTag.toLowerCase().trim())) {
+          const ingredientRsc = getTrim(ingredientRessource[k]);
+          if (includes(ingredientRsc, currentTag)) {
             flag += 1;
             break;
           }
