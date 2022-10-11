@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 function createRecipesCardDOM(data) {
   const {
     name, ingredients, time, description,

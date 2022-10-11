@@ -13,7 +13,7 @@ const ROWUP = document.querySelectorAll('.angle-up');
 /* Event */
 
 SEARCHINPUT.addEventListener('input', () => {
-  const INPUT = SEARCHINPUT.value;
+  INPUT = SEARCHINPUT.value;
   addSearch(INPUT);
 });
 
@@ -47,13 +47,7 @@ function openTagIngredient() {
     const INPUTTAG = SEARCHTAG.value.trim();
     tagSearch(INPUTTAG);
   });
-  const LINKTAG = document.querySelectorAll('.linkTag');
-  for (let i = 0; i < LINKTAG.length; i += 1) {
-    LINKTAG[i].addEventListener('click', () => {
-      const LINK = LINKTAG[i].innerHTML;
-      addLinkTag(LINK);
-    });
-  }
+  linkTag();
 }
 /* if close dropdown Ingrédient */
 function closeTagIngredient() {
@@ -76,13 +70,7 @@ function openTagAppareils() {
     const INPUTTAG = SEARCHTAG.value.trim();
     tagSearchAp(INPUTTAG);
   });
-  const LINKTAG = document.querySelectorAll('.linkTag');
-  for (let i = 0; i < LINKTAG.length; i += 1) {
-    LINKTAG[i].addEventListener('click', () => {
-      const LINK = LINKTAG[i].innerHTML;
-      addLinkTag(LINK);
-    });
-  }
+  linkTag();
 }
 
 /* if close dropdown Appareil */
@@ -107,13 +95,7 @@ function openTagUstensiles() {
     const INPUTTAG = SEARCHTAG.value.trim();
     tagSearchUs(INPUTTAG);
   });
-  const LINKTAG = document.querySelectorAll('.linkTag');
-  for (let i = 0; i < LINKTAG.length; i += 1) {
-    LINKTAG[i].addEventListener('click', () => {
-      const LINK = LINKTAG[i].innerHTML;
-      addLinkTag(LINK);
-    });
-  }
+  linkTag();
 }
 
 /* if close dropdown Ustensils */
