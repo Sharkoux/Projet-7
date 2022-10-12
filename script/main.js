@@ -157,7 +157,7 @@ function displayData(Datarecipe) {
 function addSearch(INPUT) {
   if (INPUT.length >= 2 && arraytags.length === 0) {
     const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(INPUT));
-    resultFilter = recipes.filter((item) => item.name.toLocaleLowerCase().includes(INPUT.toLocaleLowerCase())
+    resultFilter = recipes.filter((item) => getTrim(item.name).includes(getTrim(INPUT))
     || item.description.includes(INPUT)
     || filtIngredients(item.ingredients));
 
@@ -172,11 +172,11 @@ function addSearch(INPUT) {
       const currentTag = getTrim(element);
 
       const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(currentTag));
-      const newlist = recipes.filter((item) => item.name.toLocaleLowerCase().includes(currentTag.toLocaleLowerCase())
+      const newlist = recipes.filter((item) =>  getTrim(item.name).includes(getTrim(currentTag))
     || item.description.includes(currentTag)
     || filtIngredients(item.ingredients));
 
-      console.log(newlist);
+
       if (newlist.length > 0) {
         recipeszone.innerHTML = '';
         displayData(newlist);
