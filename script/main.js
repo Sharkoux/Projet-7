@@ -172,14 +172,14 @@ function addSearch(INPUT) {
       const currentTag = getTrim(element);
 
       const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(currentTag));
-      const newlist = recipes.filter((item) =>  getTrim(item.name).includes(getTrim(currentTag))
+      const resultFilter = recipes.filter((item) =>  getTrim(item.name).includes(getTrim(currentTag))
     || item.description.includes(currentTag)
     || filtIngredients(item.ingredients));
 
 
-      if (newlist.length > 0) {
+      if (resultFilter.length > 0) {
         recipeszone.innerHTML = '';
-        displayData(newlist);
+        displayData(resultFilter);
       }
     });
   }
