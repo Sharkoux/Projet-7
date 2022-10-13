@@ -95,8 +95,7 @@ header img {
 
 .dropdown-menu {
     width: 650px;
-    max-height: 400px ;
-    flex-direction: column;
+    max-height: 400px;
     flex-wrap: wrap;
     color: white;
     padding: 10px;
