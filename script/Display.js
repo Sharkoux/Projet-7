@@ -9,10 +9,11 @@ function createRecipesCardDOM(data) {
 
   const ul = document.createElement('ul');
 
-  for (let e = 0; e < ingredients.length; e += 1) {
-    const { ingredient } = ingredients[e];
-    const { quantity } = ingredients[e];
-    const { unit } = ingredients[e];
+  ingredients.forEach(element => {
+    
+    const { ingredient } = element;
+    const { quantity } = element;
+    const { unit } = element;
 
     const li = document.createElement('li');
     const strong = document.createElement('strong');
@@ -31,7 +32,7 @@ function createRecipesCardDOM(data) {
     const Article = article.children[1].children[1];
     Article.appendChild(ul);
     Article.insertBefore(ul, Article.children[0]);
-  }
+  }); 
 
   return article;
 }
