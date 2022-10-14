@@ -8,7 +8,7 @@
 
 const recipeszone = document.querySelector('.recipes_card');
 const dropdownmenu = document.querySelectorAll('.dropdown-menu');
-let INPUT;
+let input;
 
 const DivTag = document.querySelector('.divtag');
 
@@ -46,7 +46,7 @@ class Recipe {
       this.availableIngredientsTags.push(ingredient);
     }
     const tag = [...new Set(this.availableIngredientsTags)];
-
+    
     for (let k = 0; k < tag.length; k += 1) {
       const finish = tagIngredient(tag[k]);
       dropdownmenu[0].appendChild(finish);
@@ -88,13 +88,13 @@ class Recipe {
     this.linksTags = newList;
     arraytags = newList;
     if (this.linksTags.length > 0) {
-      if (!INPUT) {
+      if (!input) {
         this.resultfilters = recipes;
         this.linkTags();
       } else {
         this.linkTags();
       }
-    } else if (!INPUT) {
+    } else if (!input) {
       recipeszone.innerHTML = '';
       displayData(recipes);
     } else {
@@ -105,7 +105,7 @@ class Recipe {
 
   /* Method for display new tag filter  */
   linkTags() {
-    
+    console.log(this.linksTags)
     const newlist = [];
     for (let i = 0; i < this.resultfilters.length; i += 1) {
       const ingredientRessource = getRessource(this.resultfilters[i]);
@@ -151,14 +151,15 @@ function displayData(Datarecipe) {
     }
   });
   linkTag();
+  
 }
 
 /* function filter */
-function addSearch(INPUT) {
-  if (INPUT.length >= 2 && arraytags.length === 0) {
-    const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(INPUT));
-    resultFilter = recipes.filter((item) => getTrim(item.name).includes(getTrim(INPUT))
-    || item.description.includes(INPUT)
+function addSearch(input) {
+  if (input.length >= 2 && arraytags.length === 0) {
+    const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(input));
+    resultFilter = recipes.filter((item) => getTrim(item.name).includes(getTrim(input))
+    || item.description.includes(input)
     || filtIngredients(item.ingredients));
 
     if (resultFilter.length > 0) {
@@ -167,7 +168,7 @@ function addSearch(INPUT) {
     }
   }
 
-  if (INPUT.length === 0 && arraytags.length > 0) {
+  if (input.length === 0 && arraytags.length > 0) {
     arraytags.forEach((element) => {
       const currentTag = getTrim(element);
 

@@ -20,7 +20,7 @@ class TagFilters {
   tagFilter() {
     dropdownmenu[0].innerHTML = '';
     const Filter = [...new Set(this.tagfilter)];
-
+    
     for (let i = 0; i < Filter.length; i += 1) {
       const FILTERTAG = tagIngredient(Filter[i]);
       dropdownmenu[0].appendChild(FILTERTAG);
@@ -67,7 +67,7 @@ function tagSearch(INPUTTAG) {
     const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilter();
   }
-  if (!INPUT) {
+  if (!input) {
     resultFilter = recipes;
   }
   linkTag();

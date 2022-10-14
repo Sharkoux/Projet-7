@@ -41,6 +41,7 @@ const getRessource = (recipe) => {
 const getTrim = (str) => str.toLowerCase().trim();
 
 function linkTag() {
+  
   const linkTags = document.querySelectorAll('.linkTag');
   for (let j = 0; j < linkTags.length; j += 1) {
     linkTags[j].addEventListener('click', () => {
