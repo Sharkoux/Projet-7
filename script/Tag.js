@@ -67,7 +67,7 @@ function tagSearch(INPUTTAG) {
     const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilter();
   }
-  if (!input) {
+  if (!INPUT) {
     resultFilter = recipes;
   }
   linkTag();
@@ -121,11 +121,13 @@ function tagsearchUs(INPUTTAG) {
 /* function for add Tag */
 function addLinkTag(LINK) {
   const link = getTrim(LINK);
+ 
   /* if not tag */
   if (!DivTag.innerHTML) {
     const ADDtags = addTag(LINK);
     DivTag.appendChild(ADDtags);
     arrayTag.push(LINK);
+    
     /* loop for color tag */
 
     for (let i = 0; i < recipes.length; i++) {
@@ -142,7 +144,7 @@ function addLinkTag(LINK) {
         }
       }
     }
-
+    
     /* if tag but not his click tag */
   } else if (includes(DivTag.innerHTML, LINK) === false) {
     const ADDtags = addTag(LINK);
@@ -162,7 +164,7 @@ function addLinkTag(LINK) {
       }
     }
   }
-
+  
   /* loop for delete tag */
   const supTag = document.querySelectorAll('.divtags'); // HTMLCOllection
   const arr = Array.from(supTag).map((tagEl) => tagEl.innerText);
@@ -170,11 +172,30 @@ function addLinkTag(LINK) {
   const globalClass = new Recipe(arr);
   arraytags = arrayTag;
   globalClass.linkTags(arrayTag);
+  console.log(arrayTag)
+  const linkTgaz = document.querySelectorAll('.linkTag');
+  for(let j = 0; j < arraytags.length; j += 1) {
+  for(let i = 0; i < linkTgaz.length; i += 1){
+    if(getTrim(linkTgaz[i].innerHTML) === getTrim(arraytags[j])) {
+      linkTgaz[i].style.display = "none";
+    }
+    
+  }
+}
   for (let i = 0; i < supTag.length; i += 1) {
     supTag[i].addEventListener('click', () => {
       arrayTag = [];
       globalClass.deleteLink(supTag[i].innerText);
       supTag[i].remove();
+      const linkTgaz = document.querySelectorAll('.linkTag');
+      for(let j = 0; j < arraytags.length; j += 1) {
+      for(let i = 0; i < linkTgaz.length; i += 1){
+        if(getTrim(linkTgaz[i].innerHTML) === getTrim(arraytags[j])) {
+          linkTgaz[i].style.display = "none";
+        }
+        
+      }
+    }
     });
   }
 }

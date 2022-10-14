@@ -8,7 +8,7 @@
 
 const recipeszone = document.querySelector('.recipes_card');
 const dropdownmenu = document.querySelectorAll('.dropdown-menu');
-let input;
+let INPUT;
 
 const DivTag = document.querySelector('.divtag');
 
@@ -18,7 +18,7 @@ let arrayUstensils = [];
 let arrayTag = [];
 let resultFilter = [];
 let arraytags = [];
-const link = [];
+let link = [];
 
 /* class for format data card */
 class Recipe {
@@ -42,6 +42,7 @@ class Recipe {
     /* Display ingredients Tags */
     dropdownmenu[0].innerHTML = '';
     for (let j = 0; j < this.ingredients.length; j += 1) {
+      
       const ingredient = getTrim(this.ingredients[j].ingredient);
       this.availableIngredientsTags.push(ingredient);
     }
@@ -88,13 +89,13 @@ class Recipe {
     this.linksTags = newList;
     arraytags = newList;
     if (this.linksTags.length > 0) {
-      if (!input) {
+      if (!INPUT) {
         this.resultfilters = recipes;
         this.linkTags();
       } else {
         this.linkTags();
       }
-    } else if (!input) {
+    } else if (!INPUT) {
       recipeszone.innerHTML = '';
       displayData(recipes);
     } else {
@@ -111,7 +112,7 @@ class Recipe {
       const ingredientRessource = getRessource(this.resultfilters[i]);
 
       let flag = 0;
-
+      
       for (let j = 0; j < this.linksTags.length; j += 1) {
         const currentTag = getTrim(this.linksTags[j]);
         
@@ -129,7 +130,7 @@ class Recipe {
         }
       }
     }
-
+    
     recipeszone.innerHTML = '';
     displayData(newlist);
   }
@@ -150,16 +151,17 @@ function displayData(Datarecipe) {
       resultFilter = Datarecipe;
     }
   });
+  
   linkTag();
   
 }
 
 /* function filter */
-function addSearch(input) {
-  if (input.length >= 2 && arraytags.length === 0) {
-    const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(input));
-    resultFilter = recipes.filter((item) => getTrim(item.name).includes(getTrim(input))
-    || item.description.includes(input)
+function addSearch(INPUT) {
+  if (INPUT.length >= 2 && arraytags.length === 0) {
+    const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(INPUT));
+    resultFilter = recipes.filter((item) => getTrim(item.name).includes(getTrim(INPUT))
+    || item.description.includes(INPUT)
     || filtIngredients(item.ingredients));
 
     if (resultFilter.length > 0) {
@@ -168,12 +170,12 @@ function addSearch(input) {
     }
   }
 
-  if (input.length === 0 && arraytags.length > 0) {
+  if (INPUT.length === 0 && arraytags.length > 0) {
     arraytags.forEach((element) => {
       const currentTag = getTrim(element);
 
       const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(currentTag));
-       resultFilter = recipes.filter((item) =>  getTrim(item.name).includes(getTrim(currentTag))
+      const resultFilter = recipes.filter((item) =>  getTrim(item.name).includes(getTrim(currentTag))
     || item.description.includes(currentTag)
     || filtIngredients(item.ingredients));
 
