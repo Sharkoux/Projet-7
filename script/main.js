@@ -173,7 +173,7 @@ function addSearch(input) {
       const currentTag = getTrim(element);
 
       const filtIngredients = (ingredients) => ingredients.find((item) => item.ingredient.includes(currentTag));
-      const resultFilter = recipes.filter((item) =>  getTrim(item.name).includes(getTrim(currentTag))
+       resultFilter = recipes.filter((item) =>  getTrim(item.name).includes(getTrim(currentTag))
     || item.description.includes(currentTag)
     || filtIngredients(item.ingredients));
 
