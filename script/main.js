@@ -9,7 +9,7 @@
 
 const recipeszone = document.querySelector('.recipes_card');
 const dropdownmenu = document.querySelectorAll('.dropdown-menu');
-let INPUT;
+let input;
 
 const DivTag = document.querySelector('.divtag');
 
@@ -89,13 +89,13 @@ class Recipe {
     this.linksTags = newList;
     arraytags = newList;
     if (this.linksTags.length > 0) {
-      if (!INPUT) {
+      if (!input) {
         this.resultfilters = recipes;
         this.linkTags();
       } else {
         this.linkTags();
       }
-    } else if (!INPUT) {
+    } else if (!input) {
       recipeszone.innerHTML = '';
       displayData(recipes);
     } else {
@@ -157,8 +157,8 @@ function displayData(DataRecipe) {
 }
 
 /* function filter (searchbar) */
-function addSearch(INPUT) {
-  if (INPUT.length >= 2 && arraytags.length === 0) {
+function addSearch(input) {
+  if (input.length >= 2 && arraytags.length === 0) {
     // algo search recette full boucle Native
 
     const newlist = [];
@@ -167,8 +167,8 @@ function addSearch(INPUT) {
 
       for (let k = 0; k < ingredientRessource.length; k += 1) {
         const ingredientRsc = getTrim(ingredientRessource[k]);
-        const input = getTrim(INPUT);
-        if (includes(ingredientRsc, input)) {
+        const inputs = getTrim(input);
+        if (includes(ingredientRsc, inputs)) {
           newlist.push(recipes[i]);
           break;
         }
@@ -183,7 +183,7 @@ function addSearch(INPUT) {
     }
   }
 
-  if (INPUT.length === 0 && arraytags.length > 0) {
+  if (input.length === 0 && arraytags.length > 0) {
     const newlist = [];
 
     for (let i = 0; i < recipes.length; i += 1) {
@@ -214,7 +214,7 @@ function addSearch(INPUT) {
     }
   }
 
-  if (INPUT.length === 0 && arraytags.length === 0) {
+  if (input.length === 0 && arraytags.length === 0) {
     recipeszone.innerHTML = '';
     displayData(recipes);
   }
