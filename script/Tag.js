@@ -171,11 +171,29 @@ function addLinkTag(LINK) {
   const globalClass = new Recipe(arr);
   arraytags = arrayTag;
   globalClass.linkTags(arrayTag);
+  const linkTgaz = document.querySelectorAll('.linkTag');
+  for(let j = 0; j < arraytags.length; j += 1) {
+  for(let i = 0; i < linkTgaz.length; i += 1){
+    if(getTrim(linkTgaz[i].innerHTML) === getTrim(arraytags[j])) {
+      linkTgaz[i].style.display = "none";
+    }
+    
+  }
+}
   for (let i = 0; i < supTag.length; i += 1) {
     supTag[i].addEventListener('click', () => {
       arrayTag = [];
       globalClass.deleteLink(supTag[i].innerText);
       supTag[i].remove();
+      const linkTgaz = document.querySelectorAll('.linkTag');
+      for(let j = 0; j < arraytags.length; j += 1) {
+      for(let i = 0; i < linkTgaz.length; i += 1){
+        if(getTrim(linkTgaz[i].innerHTML) === getTrim(arraytags[j])) {
+          linkTgaz[i].style.display = "none";
+        }
+        
+      }
+    }
     });
   }
 }

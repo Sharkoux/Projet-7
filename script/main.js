@@ -9,7 +9,7 @@
 
 const recipeszone = document.querySelector('.recipes_card');
 const dropdownmenu = document.querySelectorAll('.dropdown-menu');
-let input;
+let INPUT;
 
 const DivTag = document.querySelector('.divtag');
 
@@ -89,13 +89,13 @@ class Recipe {
     this.linksTags = newList;
     arraytags = newList;
     if (this.linksTags.length > 0) {
-      if (!input) {
+      if (!INPUT) {
         this.resultfilters = recipes;
         this.linkTags();
       } else {
         this.linkTags();
       }
-    } else if (!input) {
+    } else if (!INPUT) {
       recipeszone.innerHTML = '';
       displayData(recipes);
     } else {
@@ -106,6 +106,7 @@ class Recipe {
 
   /* Method for display new tag filter  */
   linkTags() {
+    console.log(this.linksTags)
     const newlist = [];
     for (let i = 0; i < this.resultfilters.length; i += 1) {
       const ingredientRessource = getRessource(this.resultfilters[i]);
@@ -141,7 +142,7 @@ function displayData(DataRecipe) {
   array = [];
   arrays = [];
   arrayUstensils = [];
-
+  console.log(arrayTag)
   dropdownmenu[0].innerHTML = '';
   for (let i = 0; i < DataRecipe.length; i += 1) {
     const newRecipes = new Recipe(DataRecipe[i]);
@@ -157,8 +158,9 @@ function displayData(DataRecipe) {
 }
 
 /* function filter (searchbar) */
-function addSearch(input) {
-  if (input.length >= 2 && arraytags.length === 0) {
+function addSearch(INPUT) {
+  
+  if (INPUT.length >= 2 && arraytags.length === 0) {
     // algo search recette full boucle Native
 
     const newlist = [];
@@ -167,23 +169,24 @@ function addSearch(input) {
 
       for (let k = 0; k < ingredientRessource.length; k += 1) {
         const ingredientRsc = getTrim(ingredientRessource[k]);
-        const inputs = getTrim(input);
-        if (includes(ingredientRsc, inputs)) {
+        const INPUTs = getTrim(INPUT);
+        if (includes(ingredientRsc, INPUTs)) {
           newlist.push(recipes[i]);
           break;
         }
       }
     }
 
-    resultFilter = [...new Set(newlist)];
+    const resultFilter = [...new Set(newlist)];
 
     if (resultFilter.length > 0) {
+      
       recipeszone.innerHTML = '';
       displayData(resultFilter);
     }
   }
 
-  if (input.length === 0 && arraytags.length > 0) {
+  if (INPUT.length === 0 && arraytags.length > 0) {
     const newlist = [];
 
     for (let i = 0; i < recipes.length; i += 1) {
@@ -214,7 +217,7 @@ function addSearch(input) {
     }
   }
 
-  if (input.length === 0 && arraytags.length === 0) {
+  if (INPUT.length === 0 && arraytags.length === 0) {
     recipeszone.innerHTML = '';
     displayData(recipes);
   }
