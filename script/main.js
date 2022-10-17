@@ -18,7 +18,7 @@ let arrayUstensils = [];
 let arrayTag = [];
 let resultFilter = [];
 let arraytags = [];
-const link = [];
+let link = [];
 
 /* class for format data card */
 class Recipe {
@@ -115,7 +115,7 @@ class Recipe {
 
       for (let j = 0; j < this.linksTags.length; j += 1) {
         const currentTag = getTrim(this.linksTags[j]);
-        console.log(currentTag)
+        
         for (let k = 0; k < ingredientRessource.length; k += 1) {
           const ingredientRsc = getTrim(ingredientRessource[k]);
 
@@ -165,7 +165,7 @@ function addSearch(INPUT) {
 
     const newlist = [];
     for (let i = 0; i < recipes.length; i += 1) {
-      const ingredientRessource = getRessource(recipes[i]);
+      const ingredientRessource = getAllData(recipes[i]);
 
       for (let k = 0; k < ingredientRessource.length; k += 1) {
         const ingredientRsc = getTrim(ingredientRessource[k]);
@@ -176,8 +176,9 @@ function addSearch(INPUT) {
         }
       }
     }
-    resultFilter = [...new Set(newlist)];
 
+    resultFilter = [...new Set(newlist)];
+   
     if (resultFilter.length > 0) {
       recipeszone.innerHTML = '';
       displayData(resultFilter);
@@ -188,7 +189,7 @@ function addSearch(INPUT) {
     const newlist = [];
 
     for (let i = 0; i < recipes.length; i += 1) {
-      const ingredientRessource = getRessource(recipes[i]);
+      const ingredientRessource = getAllData(recipes[i]);
 
       let flag = 0;
 
@@ -213,6 +214,11 @@ function addSearch(INPUT) {
       recipeszone.innerHTML = '';
       displayData(newlist);
     }
+  }
+
+  if(INPUT.length === 0 && arraytags.length === 0) {
+    recipeszone.innerHTML = '';
+    displayData(recipes);
   }
 }
 

@@ -20,23 +20,48 @@ const includes = (str, t) => {
 const getRessource = (recipe) => {
   const Rsc = [];
 
-  const RecipeAp = recipe.appliance;
-  const RecipUs = recipe.ustensils;
-  const RecipIngr = recipe.ingredients;
+  const recipeAp = recipe.appliance;
+  const recipUs = recipe.ustensils;
+  const recipIngr = recipe.ingredients;
 
-  for (let i = 0; i < RecipeAp.length; i++) {
-    Rsc.push(RecipeAp);
+  for (let i = 0; i < recipeAp.length; i++) {
+    Rsc.push(recipeAp);
   }
-  for (let j = 0; j < RecipUs.length; j++) {
-    Rsc.push(RecipUs[j]);
+  for (let j = 0; j < recipUs.length; j++) {
+    Rsc.push(recipUs[j]);
   }
 
-  for (let k = 0; k < RecipIngr.length; k++) {
-    Rsc.push(RecipIngr[k].ingredient);
+  for (let k = 0; k < recipIngr.length; k++) {
+    Rsc.push(recipIngr[k].ingredient);
   }
 
   return Rsc;
 };
+
+const getAllData = (recipe) => {
+  const Rsc = [];
+
+  const recipeName = recipe.name;
+  const recipeAp = recipe.appliance;
+  const recipUs = recipe.ustensils;
+  const recipIngr = recipe.ingredients;
+
+  for (let i = 0; i < recipeAp.length; i++) {
+    Rsc.push(recipeAp);
+  }
+  for (let j = 0; j < recipUs.length; j++) {
+    Rsc.push(recipUs[j]);
+  }
+
+  for (let k = 0; k < recipIngr.length; k++) {
+    Rsc.push(recipIngr[k].ingredient);
+  }
+
+  Rsc.push(recipeName);
+
+  return Rsc;
+}
+
 
 const getTrim = (str) => str.toLowerCase().trim();
 
