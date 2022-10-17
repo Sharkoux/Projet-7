@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-use-before-define */
@@ -20,7 +21,7 @@ class TagFilters {
   tagFilter() {
     dropdownmenu[0].innerHTML = '';
     const Filter = [...new Set(this.tagfilter)];
-    
+
     for (let i = 0; i < Filter.length; i += 1) {
       const FILTERTAG = tagIngredient(Filter[i]);
       dropdownmenu[0].appendChild(FILTERTAG);
@@ -62,13 +63,13 @@ function tagSearch(INPUTTAG) {
       }
     }
   }
-  
+
   for (let k = 0; k < arraysearchtag.length; k += 1) {
     const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilter();
   }
-  if(!INPUT) {
-    resultFilter = recipes
+  if (!INPUT) {
+    resultFilter = recipes;
   }
   linkTag();
 }
@@ -80,7 +81,7 @@ function tagSearchAp(INPUTTAG) {
   for (let i = 0; i < recipes.length; i += 1) {
     const tags = recipes[i];
     const tagAppliance = getTrim(tags.appliance);
-    const inputTag = getTrim(INPUTTAG)
+    const inputTag = getTrim(INPUTTAG);
     if (includes(tagAppliance, inputTag)) {
       arraysearchtagAp.push(tags.appliance.toLowerCase());
     }
@@ -89,7 +90,7 @@ function tagSearchAp(INPUTTAG) {
     const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilterAp();
   }
-  if(!INPUT) {
+  if (!INPUT) {
     resultFilter = recipes;
   }
   linkTag();
@@ -113,7 +114,7 @@ function tagsearchUs(INPUTTAG) {
     const NEWRECIPES = new TagFilters();
     NEWRECIPES.tagFilterUs();
   }
-  if(!INPUT) {
+  if (!INPUT) {
     resultFilter = recipes;
   }
   linkTag();
@@ -127,16 +128,16 @@ function addLinkTag(LINK) {
     DivTag.appendChild(ADDtags);
     arrayTag.push(LINK);
     /* loop for color tag */
-    
+
     for (let i = 0; i < recipes.length; i++) {
       const recipesAppliance = getTrim(recipes[i].appliance);
-      
+
       if (includes(recipesAppliance, link)) {
         DivTag.firstChild.classList.add('green');
       }
       for (let j = 0; j < recipes[i].ustensils.length; j++) {
         const recipesUstensils = getTrim(recipes[i].ustensils[j]);
-        
+
         if (includes(recipesUstensils, link)) {
           DivTag.firstChild.classList.add('red');
         }
@@ -150,19 +151,19 @@ function addLinkTag(LINK) {
     arrayTag.push(LINK);
     /* loop for color tag */
     for (let i = 0; i < recipes.length; i++) {
-      const recipesAppliances = getTrim(recipes[i].appliance)
+      const recipesAppliances = getTrim(recipes[i].appliance);
       if (includes(recipesAppliances, link)) {
         DivTag.lastChild.classList.add('green');
       }
       for (let j = 0; j < recipes[i].ustensils.length; j++) {
-        const recipeUstensils = getTrim(recipes[i].ustensils[j])
+        const recipeUstensils = getTrim(recipes[i].ustensils[j]);
         if (includes(recipeUstensils, link)) {
           DivTag.lastChild.classList.add('red');
         }
       }
     }
   }
- 
+
   /* loop for delete tag */
   const supTag = document.querySelectorAll('.divtags'); // HTMLCOllection
   const arr = Array.from(supTag).map((tagEl) => tagEl.innerText);

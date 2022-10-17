@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
@@ -42,7 +43,7 @@ class Recipe {
     /* Display ingredients Tags */
     dropdownmenu[0].innerHTML = '';
     for (let j = 0; j < this.ingredients.length; j += 1) {
-      const ingredient = getTrim(this.ingredients[j].ingredient)
+      const ingredient = getTrim(this.ingredients[j].ingredient);
       this.availableIngredientsTags.push(ingredient);
     }
     const tag = [...new Set(this.availableIngredientsTags)];
@@ -66,7 +67,7 @@ class Recipe {
     /* Display ustensils Tags */
     dropdownmenu[2].innerHTML = '';
     for (let i = 0; i < this.ustensils.length; i += 1) {
-      const ustensils = getTrim(this.ustensils[i])
+      const ustensils = getTrim(this.ustensils[i]);
       this.availableUstensilsTag.push(ustensils);
     }
     const tagUs = [...new Set(this.availableUstensilsTag)];
@@ -97,11 +98,9 @@ class Recipe {
     } else if (!INPUT) {
       recipeszone.innerHTML = '';
       displayData(recipes);
-      
     } else {
       recipeszone.innerHTML = '';
       displayData(this.resultfilters);
-      
     }
   }
 
@@ -115,7 +114,7 @@ class Recipe {
 
       for (let j = 0; j < this.linksTags.length; j += 1) {
         const currentTag = getTrim(this.linksTags[j]);
-        
+
         for (let k = 0; k < ingredientRessource.length; k += 1) {
           const ingredientRsc = getTrim(ingredientRessource[k]);
 
@@ -159,7 +158,6 @@ function displayData(DataRecipe) {
 
 /* function filter (searchbar) */
 function addSearch(INPUT) {
- 
   if (INPUT.length >= 2 && arraytags.length === 0) {
     // algo search recette full boucle Native
 
@@ -170,7 +168,7 @@ function addSearch(INPUT) {
       for (let k = 0; k < ingredientRessource.length; k += 1) {
         const ingredientRsc = getTrim(ingredientRessource[k]);
         const input = getTrim(INPUT);
-        if (includes( ingredientRsc, input)) {
+        if (includes(ingredientRsc, input)) {
           newlist.push(recipes[i]);
           break;
         }
@@ -178,7 +176,7 @@ function addSearch(INPUT) {
     }
 
     resultFilter = [...new Set(newlist)];
-   
+
     if (resultFilter.length > 0) {
       recipeszone.innerHTML = '';
       displayData(resultFilter);
@@ -216,7 +214,7 @@ function addSearch(INPUT) {
     }
   }
 
-  if(INPUT.length === 0 && arraytags.length === 0) {
+  if (INPUT.length === 0 && arraytags.length === 0) {
     recipeszone.innerHTML = '';
     displayData(recipes);
   }

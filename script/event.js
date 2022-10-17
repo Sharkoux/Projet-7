@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-undef */
@@ -63,12 +64,12 @@ function addEvent(e) {
   }
 
   /* if open dropdown Ustensiles */
-  if(e.target.classList.contains('btn-danger')) {
+  if (e.target.classList.contains('btn-danger')) {
     document.querySelector('.btn_danger').classList.toggle('active');
     DROPBTN[2].style.setProperty('border-radius', '5px 5px 0 0');
     document.querySelector('.btn-danger').innerHTML = '<input class="input form-control search-ustensils red" type="text" placeholder="Rechercher un ustensiles"></input><em class="fa-solid fa-angle-up angle-up"></em>';
     const SEARCHTAG = document.querySelector('.search-ustensils');
-  
+
     SEARCHTAG.addEventListener('input', () => {
       const INPUTTAG = SEARCHTAG.value.trim();
       tagSearchUs(INPUTTAG);
@@ -76,7 +77,6 @@ function addEvent(e) {
     linkTag();
   }
 
-  
   /* if close dropdown Ustensils */
   if (!e.target.classList.contains('btn-danger') && !e.target.classList.contains('input')) {
     document.querySelector('.btn_danger').classList.remove('active');
@@ -86,6 +86,3 @@ function addEvent(e) {
 }
 
 document.body.addEventListener('click', addEvent, false);
-
-
-

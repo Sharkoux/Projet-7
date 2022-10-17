@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-plusplus */
 
@@ -60,8 +61,7 @@ const getAllData = (recipe) => {
   Rsc.push(recipeName);
 
   return Rsc;
-}
-
+};
 
 const getTrim = (str) => str.toLowerCase().trim();
 

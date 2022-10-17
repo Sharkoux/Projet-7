@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 function createRecipesCardDOM(data) {
   const {
     name, ingredients, time, description,
