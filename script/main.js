@@ -144,6 +144,7 @@ function displayData(DataRecipe) {
   arrayUstensils = [];
   console.log(arrayTag)
   dropdownmenu[0].innerHTML = '';
+
   for (let i = 0; i < DataRecipe.length; i += 1) {
     const newRecipes = new Recipe(DataRecipe[i]);
     newRecipes.tagIngredientAvailable();
@@ -176,8 +177,8 @@ function addSearch(INPUT) {
         }
       }
     }
-
-    const resultFilter = [...new Set(newlist)];
+    
+    resultFilter = [...new Set(newlist)];
 
     if (resultFilter.length > 0) {
       
