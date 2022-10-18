@@ -106,7 +106,7 @@ class Recipe {
 
   /* Method for display new tag filter  */
   linkTags() {
-    console.log(this.linksTags)
+   
     const newlist = [];
     for (let i = 0; i < this.resultfilters.length; i += 1) {
       const ingredientRessource = getRessource(this.resultfilters[i]);
@@ -142,7 +142,7 @@ function displayData(DataRecipe) {
   array = [];
   arrays = [];
   arrayUstensils = [];
-  console.log(arrayTag)
+
   dropdownmenu[0].innerHTML = '';
 
   for (let i = 0; i < DataRecipe.length; i += 1) {
