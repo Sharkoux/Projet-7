@@ -172,7 +172,7 @@ function addLinkTag(LINK) {
   const globalClass = new Recipe(arr);
   arraytags = arrayTag;
   globalClass.linkTags(arrayTag);
-  console.log(arrayTag)
+  
   const linkTgaz = document.querySelectorAll('.linkTag');
   for(let j = 0; j < arraytags.length; j += 1) {
   for(let i = 0; i < linkTgaz.length; i += 1){
