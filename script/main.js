@@ -178,7 +178,7 @@ function addSearch(INPUT) {
       }
     }
     
-    resultFilter = [...new Set(newlist)];
+    const resultFilter = [...new Set(newlist)];
 
     if (resultFilter.length > 0) {
       
